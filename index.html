@@ -1052,16 +1052,35 @@ img { max-width: 100%; }
     <!-- CANDIDAT : Register -->
     <div id="form-register" class="hidden">
       <div style="display:flex;flex-direction:column;gap:14px">
-        <div class="form-row">
-          <div class="form-group"><label class="form-label">Prénom</label><input type="text" class="form-input" placeholder="Amara"></div>
-          <div class="form-group"><label class="form-label">Nom</label><input type="text" class="form-input" placeholder="Koné"></div>
+        <!-- Bloc explicatif numérologie -->
+        <div style="background:linear-gradient(135deg,var(--navy),var(--navy-light));border-radius:var(--radius-sm);padding:14px 16px;color:white">
+          <div style="font-size:0.78rem;font-weight:700;color:var(--gold);margin-bottom:6px">✦ Pourquoi ces informations ?</div>
+          <div style="font-size:0.78rem;color:rgba(255,255,255,0.8);line-height:1.6">Career OS utilise votre <strong style="color:white">prénom complet</strong> et votre <strong style="color:white">date de naissance</strong> pour générer votre portrait de personnalité professionnelle via une analyse numérologique. C'est le fondement de tout votre accompagnement — et ce qui nous différencie de tous les autres outils.</div>
         </div>
+        <div class="form-row">
+          <div class="form-group"><label class="form-label">Prénom(s) complet(s)</label><input type="text" class="form-input" placeholder="ex : Amara Fatoumata"></div>
+          <div class="form-group"><label class="form-label">Nom de famille</label><input type="text" class="form-input" placeholder="Koné"></div>
+        </div>
+        <div class="form-group"><label class="form-label">Date de naissance <span style="font-weight:400;color:var(--text-muted)">(utilisée pour le calcul de chemin de vie)</span></label><input type="date" class="form-input"></div>
         <div class="form-group"><label class="form-label">Email</label><input type="email" class="form-input" placeholder="votre@email.com"></div>
-        <div class="form-group"><label class="form-label">WhatsApp</label><input type="tel" class="form-input" placeholder="+225 07 xx xx xx xx"></div>
-        <div class="form-group"><label class="form-label">Date de naissance</label><input type="date" class="form-input"></div>
+        <div class="form-group"><label class="form-label">WhatsApp <span style="font-weight:400;color:var(--text-muted)">(notifications offres & coaching)</span></label><input type="tel" class="form-input" placeholder="+225 07 xx xx xx xx"></div>
+        <div class="form-group">
+          <label class="form-label">Domaine professionnel</label>
+          <select class="form-input form-select">
+            <option value="">Sélectionner votre domaine</option>
+            <option>Administration & Gestion</option>
+            <option>Finance & Comptabilité</option>
+            <option>Ressources Humaines</option>
+            <option>Commercial & Marketing</option>
+            <option>Informatique & Tech</option>
+            <option>Juridique</option>
+            <option>Logistique & Supply Chain</option>
+            <option>Autre</option>
+          </select>
+        </div>
         <div class="form-group"><label class="form-label">Mot de passe</label><input type="password" class="form-input" placeholder="Minimum 8 caractères"></div>
-        <button class="btn btn-gold btn-full" onclick="demoLogin()">Créer mon compte →</button>
-        <div style="font-size:0.72rem;color:var(--text-muted);text-align:center">Paiement requis pour activer l'accès complet</div>
+        <button class="btn btn-gold btn-full" onclick="demoLogin()">Commencer mon analyse →</button>
+        <div style="font-size:0.72rem;color:var(--text-muted);text-align:center">Paiement requis pour activer l'accès complet · Vos données restent privées</div>
       </div>
     </div>
 
@@ -1089,8 +1108,55 @@ img { max-width: 100%; }
           <div class="form-group"><label class="form-label">Nom</label><input type="text" class="form-input" placeholder="Bamba"></div>
         </div>
         <div class="form-group"><label class="form-label">Entreprise</label><input type="text" class="form-input" placeholder="Orange CI"></div>
-        <div class="form-group"><label class="form-label">Poste</label><input type="text" class="form-input" placeholder="Responsable RH"></div>
-        <div class="form-group"><label class="form-label">Email professionnel</label><input type="email" class="form-input" placeholder="rh@entreprise.com"></div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Secteur d'activité</label>
+            <select class="form-input form-select">
+              <option>Télécommunications</option><option>Banque & Finance</option>
+              <option>Industrie & FMCG</option><option>Énergie & Pétrole</option>
+              <option>Services & Conseil</option><option>Santé</option><option>Autre</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Taille de l'entreprise</label>
+            <select class="form-input form-select">
+              <option>1 – 50 employés</option><option>51 – 200 employés</option>
+              <option>201 – 1 000 employés</option><option>1 000+ employés</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group"><label class="form-label">Poste / Fonction</label><input type="text" class="form-input" placeholder="DRH / Responsable Recrutement"></div>
+        <div class="form-group">
+          <label class="form-label">Email professionnel <span style="font-weight:400;color:var(--text-muted)">(domaine entreprise recommandé)</span></label>
+          <input type="email" class="form-input" placeholder="rh@votre-entreprise.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label">RCCM / N° Registre de Commerce <span style="font-weight:400;color:var(--text-muted)">(optionnel — obtenir le badge "Entreprise vérifiée")</span></label>
+          <input type="text" class="form-input" placeholder="CI-ABJ-2019-B-12345">
+        </div>
+        <!-- Carte culturelle -->
+        <div style="background:var(--gold-pale);border-radius:var(--radius-sm);padding:14px;border:1px solid rgba(212,168,67,0.3)">
+          <div style="font-size:0.78rem;font-weight:700;color:var(--warning);margin-bottom:10px">✦ Carte culturelle — 2 questions rapides</div>
+          <div style="font-size:0.75rem;color:var(--text-muted);margin-bottom:10px">Ces réponses permettent à l'IA d'améliorer la qualité du matching personnalité-poste.</div>
+          <div class="form-group" style="margin-bottom:10px">
+            <label class="form-label" style="font-size:0.78rem">Style de management dominant</label>
+            <select class="form-input form-select" style="font-size:0.82rem">
+              <option>Direction par objectifs — autonomie valorisée</option>
+              <option>Management collaboratif — décisions collectives</option>
+              <option>Structure hiérarchique claire — procédures strictes</option>
+              <option>Environnement agile — rythme rapide et itératif</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" style="font-size:0.78rem">Ce que vous valorisez le plus chez un collaborateur</label>
+            <select class="form-input form-select" style="font-size:0.82rem">
+              <option>Rigueur & fiabilité</option>
+              <option>Initiative & autonomie</option>
+              <option>Esprit d'équipe & communication</option>
+              <option>Adaptabilité & polyvalence</option>
+            </select>
+          </div>
+        </div>
         <div class="form-group"><label class="form-label">Mot de passe</label><input type="password" class="form-input" placeholder="Minimum 8 caractères"></div>
         <button class="btn btn-full btn-gold" onclick="demoRecruiterLogin()">Créer mon espace recruteur →</button>
         <div style="font-size:0.72rem;color:var(--text-muted);text-align:center">Accès gratuit · 3 profils/mois · Sans CB</div>
@@ -1161,6 +1227,9 @@ img { max-width: 100%; }
       </button>
       <button class="nav-item" id="nav-wishlist" onclick="navigateTo('wishlist')">
         <span class="nav-icon">🔖</span> Offres sauvegardées
+      </button>
+      <button class="nav-item" id="nav-entreprises" onclick="navigateTo('entreprises')">
+        <span class="nav-icon">🏢</span> Entreprises & Affinité
       </button>
       <button class="nav-item" id="nav-entretien" onclick="navigateTo('entretien')">
         <span class="nav-icon">🎤</span> Préparation entretien
@@ -1880,7 +1949,7 @@ Profil : Bac+3 minimum, 3 ans d'expérience, maîtrise des outils bureautiques, 
             <div style="text-align:center;margin-bottom:16px">
               <div style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--navy)">AMARA KONÉ</div>
               <div style="font-size:0.85rem;color:var(--text-muted)">Office Manager | Coordinatrice Administrative</div>
-              <div style="font-size:0.8rem;color:var(--text-muted)">Abidjan · amara.kone@gmail.com · +225 07 xx xx xx · LinkedIn</div>
+              <div style="font-size:0.8rem;color:var(--text-muted)">Abidjan · amara.kone@email.ci · +225 07 xx xx xx · LinkedIn</div>
             </div>
             <div class="cv-section-title">RÉSUMÉ DE PROFIL</div>
             <p style="font-size:0.83rem;line-height:1.7">Office Manager rigoureuse et polyvalente avec 3 ans d'expérience dans la gestion administrative de direction, la coordination inter-services et l'organisation d'événements corporate. Réputée pour ma fiabilité, mon sens du détail et ma capacité à gérer plusieurs priorités simultanément. Bilingue français-anglais (B2 certifié). Maîtrise d'Odoo ERP, Asana et de la suite Microsoft Office.</p>
@@ -2715,7 +2784,7 @@ Vous trouverez en pièce jointe mon CV et ma lettre de motivation adaptée à vo
 Je reste disponible pour tout entretien à votre convenance.
 
 Cordialement,
-Amara Koné | amara.kone@gmail.com | +225 07 xx xx xx
+Amara Koné | <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="b9d8d4d8cbd897d2d6d7dcf9ded4d8d0d597dad6d4">[email&#160;protected]</a> | +225 07 xx xx xx
             </div>
           </div>
         </div>
@@ -3315,6 +3384,143 @@ Amara
     <!-- ================================================================
          PAGE : BADGES (Tous les badges)
     ================================================================ -->
+    <!-- ================================================================
+         PAGE : ENTREPRISES & AFFINITÉ
+    ================================================================ -->
+    <div id="page-entreprises" class="page-content fade-in hidden">
+      <div class="page-header">
+        <h1 class="page-title">Entreprises & Affinité</h1>
+        <p class="page-sub">Découvrez votre compatibilité personnalité-culture avec les entreprises présentes sur Career OS.</p>
+      </div>
+
+      <div style="background:linear-gradient(135deg,var(--navy),var(--navy-light));border-radius:var(--radius);padding:18px 22px;margin-bottom:24px;color:white;display:flex;align-items:center;gap:16px">
+        <div style="font-size:1.8rem">✦</div>
+        <div>
+          <div style="font-weight:700">Comment fonctionne le score d'affinité ?</div>
+          <div style="font-size:0.82rem;color:rgba(255,255,255,0.7);margin-top:3px">Career OS compare votre profil Big Five et votre Chemin de Vie avec la carte culturelle déclarée par chaque entreprise. Vous obtenez un score personnalisé — pas un score générique.</div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:18px">
+
+        <!-- Entreprise 1 — Orange CI -->
+        <div class="card" style="border-top:4px solid var(--gold);cursor:pointer" onclick="openEntrepriseDetail('orange')">
+          <div style="display:flex;align-items:flex-start;gap:14px;margin-bottom:14px">
+            <div class="offre-logo" style="width:52px;height:52px;font-size:0.9rem;flex-shrink:0">OCI</div>
+            <div style="flex:1">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start">
+                <div>
+                  <div style="font-weight:700;color:var(--navy)">Orange Côte d'Ivoire</div>
+                  <div style="font-size:0.78rem;color:var(--text-muted)">Télécommunications · 1 000+ employés</div>
+                </div>
+                <div style="text-align:center;background:var(--gold-pale);padding:8px 12px;border-radius:8px">
+                  <div style="font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:var(--navy)">92%</div>
+                  <div style="font-size:0.65rem;color:var(--text-muted)">Affinité</div>
+                </div>
+              </div>
+              <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap">
+                <span class="badge badge-green" style="font-size:0.68rem">✓ Entreprise vérifiée</span>
+                <span class="badge badge-gold" style="font-size:0.68rem">2 offres actives</span>
+              </div>
+            </div>
+          </div>
+          <!-- Détail affinité -->
+          <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:14px">
+            <div style="display:flex;align-items:center;gap:8px;font-size:0.8rem">
+              <span style="color:var(--text-muted);width:130px">Style de management</span>
+              <div class="fit-bar"><div class="fit-fill" style="width:95%"></div></div>
+              <span style="font-weight:700;color:var(--success);width:30px;font-size:0.75rem">Fort</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:0.8rem">
+              <span style="color:var(--text-muted);width:130px">Valeurs partagées</span>
+              <div class="fit-bar"><div class="fit-fill" style="width:88%"></div></div>
+              <span style="font-weight:700;color:var(--success);width:30px;font-size:0.75rem">Fort</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:0.8rem">
+              <span style="color:var(--text-muted);width:130px">Rythme de travail</span>
+              <div class="fit-bar"><div class="fit-fill" style="width:80%"></div></div>
+              <span style="font-weight:700;color:var(--navy);width:30px;font-size:0.75rem">Bon</span>
+            </div>
+          </div>
+          <div style="background:var(--gold-pale);border-radius:6px;padding:10px 12px;font-size:0.78rem;color:var(--text);line-height:1.6;margin-bottom:14px;border-left:2px solid var(--gold)">
+            <strong style="color:var(--warning)">✦ IA :</strong> Votre profil Chemin de Vie 7 à haute Conscience correspond parfaitement à la culture de rigueur et d'excellence d'Orange CI. Leur management par objectifs laisse l'espace d'autonomie dont vous avez besoin.
+          </div>
+          <button class="btn btn-primary btn-sm btn-full" onclick="event.stopPropagation();navigateTo('offres')">Voir les 2 offres actives →</button>
+        </div>
+
+        <!-- Entreprise 2 — TotalEnergies -->
+        <div class="card" style="border-top:4px solid var(--navy);cursor:pointer" onclick="openEntrepriseDetail('total')">
+          <div style="display:flex;align-items:flex-start;gap:14px;margin-bottom:14px">
+            <div class="offre-logo" style="width:52px;height:52px;font-size:0.9rem;flex-shrink:0">TCI</div>
+            <div style="flex:1">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start">
+                <div>
+                  <div style="font-weight:700;color:var(--navy)">TotalEnergies CI</div>
+                  <div style="font-size:0.78rem;color:var(--text-muted)">Énergie · 500–1000 employés</div>
+                </div>
+                <div style="text-align:center;background:var(--info-bg);padding:8px 12px;border-radius:8px">
+                  <div style="font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:var(--navy)">85%</div>
+                  <div style="font-size:0.65rem;color:var(--text-muted)">Affinité</div>
+                </div>
+              </div>
+              <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap">
+                <span class="badge badge-green" style="font-size:0.68rem">✓ Entreprise vérifiée</span>
+                <span class="badge badge-blue" style="font-size:0.68rem">1 offre active</span>
+              </div>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:14px">
+            <div style="display:flex;align-items:center;gap:8px;font-size:0.8rem"><span style="color:var(--text-muted);width:130px">Style de management</span><div class="fit-bar"><div class="fit-fill" style="width:85%"></div></div><span style="font-weight:700;color:var(--success);width:30px;font-size:0.75rem">Fort</span></div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:0.8rem"><span style="color:var(--text-muted);width:130px">Valeurs partagées</span><div class="fit-bar"><div class="fit-fill" style="width:78%"></div></div><span style="font-weight:700;color:var(--navy);width:30px;font-size:0.75rem">Bon</span></div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:0.8rem"><span style="color:var(--text-muted);width:130px">Rythme de travail</span><div class="fit-bar"><div class="fit-fill" style="width:70%"></div></div><span style="font-weight:700;color:var(--text-muted);width:30px;font-size:0.75rem">Moy.</span></div>
+          </div>
+          <div style="background:var(--info-bg);border-radius:6px;padding:10px 12px;font-size:0.78rem;color:var(--text);line-height:1.6;margin-bottom:14px;border-left:2px solid var(--navy)">
+            <strong style="color:var(--navy)">✦ IA :</strong> Bonne correspondance globale. Le rythme intense d'une multinationale pétrolière peut demander une adaptabilité plus grande que votre profil préféré. À évaluer en entretien.
+          </div>
+          <button class="btn btn-outline btn-sm btn-full" onclick="event.stopPropagation();navigateTo('offres')">Voir l'offre active →</button>
+        </div>
+
+        <!-- Entreprise 3 — Ecobank -->
+        <div class="card" style="border-top:4px solid var(--border);cursor:pointer" onclick="openEntrepriseDetail('ecobank')">
+          <div style="display:flex;align-items:flex-start;gap:14px;margin-bottom:14px">
+            <div class="offre-logo" style="width:52px;height:52px;font-size:0.9rem;flex-shrink:0">ECB</div>
+            <div style="flex:1">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start">
+                <div>
+                  <div style="font-weight:700;color:var(--navy)">Ecobank CI</div>
+                  <div style="font-size:0.78rem;color:var(--text-muted)">Banque & Finance · 200–500 employés</div>
+                </div>
+                <div style="text-align:center;background:#F3F4F6;padding:8px 12px;border-radius:8px">
+                  <div style="font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;color:var(--text-muted)">71%</div>
+                  <div style="font-size:0.65rem;color:var(--text-muted)">Affinité</div>
+                </div>
+              </div>
+              <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap">
+                <span class="badge badge-gray" style="font-size:0.68rem">Carte culturelle partielle</span>
+              </div>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:14px">
+            <div style="display:flex;align-items:center;gap:8px;font-size:0.8rem"><span style="color:var(--text-muted);width:130px">Style de management</span><div class="fit-bar"><div class="fit-fill" style="width:60%"></div></div><span style="font-weight:700;color:var(--text-muted);width:30px;font-size:0.75rem">Moy.</span></div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:0.8rem"><span style="color:var(--text-muted);width:130px">Valeurs partagées</span><div class="fit-bar"><div class="fit-fill" style="width:75%"></div></div><span style="font-weight:700;color:var(--navy);width:30px;font-size:0.75rem">Bon</span></div>
+          </div>
+          <div style="background:#F9F9F8;border-radius:6px;padding:10px 12px;font-size:0.78rem;color:var(--text);line-height:1.6;margin-bottom:14px;border-left:2px solid var(--border)">
+            <strong style="color:var(--text-muted)">✦ IA :</strong> Score partiel — Ecobank n'a pas encore complété sa carte culturelle. L'analyse est basée sur les données sectorielles uniquement.
+          </div>
+          <button class="btn btn-ghost btn-sm btn-full" onclick="event.stopPropagation();navigateTo('offres')">Voir les offres →</button>
+        </div>
+
+        <!-- CTA : Inviter une entreprise -->
+        <div style="background:var(--bg);border:2px dashed var(--border);border-radius:var(--radius);padding:28px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:12px">
+          <div style="font-size:2rem">🏢</div>
+          <div style="font-family:'Playfair Display',serif;font-size:1rem;color:var(--navy)">Votre entreprise cible n'est pas encore là ?</div>
+          <div style="font-size:0.82rem;color:var(--text-muted);line-height:1.6">Invitez-la à rejoindre Career OS. Dès qu'elle s'inscrit et complète sa carte culturelle, vous recevez votre score d'affinité.</div>
+          <button class="btn btn-primary btn-sm" onclick="showBadgeToast('✉️','Invitation envoyée !','L\'entreprise sera notifiée par email')">Inviter une entreprise</button>
+        </div>
+
+      </div>
+    </div>
+
     <div id="page-badges" class="page-content fade-in hidden">
       <div class="page-header">
         <h1 class="page-title">Mes badges & progression</h1>
@@ -3844,44 +4050,40 @@ Amara
 
         <!-- Candidat 1 -->
         <div class="candidate-card" onclick="openCandidateProfile(0)">
-          <div style="display:flex;align-items:flex-start;gap:14px;margin-bottom:14px">
-            <div class="candidate-avatar-lg">AK</div>
+          <div style="display:flex;align-items:flex-start;gap:14px;margin-bottom:12px">
+            <div style="position:relative">
+              <div class="candidate-avatar-lg">AK</div>
+              <div style="position:absolute;bottom:-1px;right:-1px;width:12px;height:12px;border-radius:50%;background:var(--success);border:2px solid white" title="En ligne aujourd'hui"></div>
+            </div>
             <div style="flex:1">
-              <div style="display:flex;justify-content:space-between">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start">
                 <div>
-                  <div style="font-weight:700;color:var(--navy);font-size:0.95rem">Amara K.</div>
-                  <div style="font-size:0.78rem;color:var(--text-muted)">Office Manager · Abidjan</div>
+                  <div style="display:flex;align-items:center;gap:6px">
+                    <div style="font-weight:700;color:var(--navy);font-size:0.95rem">Amara K.</div>
+                    <span style="background:var(--success-bg);color:var(--success);font-size:0.62rem;font-weight:700;padding:1px 6px;border-radius:99px">✓ Vérifié IA</span>
+                  </div>
+                  <div style="font-size:0.78rem;color:var(--text-muted)">Office Manager · Abidjan · Profil 96% complété</div>
                 </div>
                 <div class="offre-match">⚡ 94% fit</div>
               </div>
-              <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap">
+              <div style="display:flex;gap:6px;margin-top:6px;flex-wrap:wrap">
                 <span class="badge badge-blue" style="font-size:0.68rem">Disponible maintenant</span>
                 <span class="badge badge-gold" style="font-size:0.68rem">Chemin de Vie 7</span>
+                <span style="font-size:0.68rem;color:var(--success);align-self:center">🕐 Actif aujourd'hui</span>
               </div>
             </div>
           </div>
-          <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:14px">
-            <div style="display:flex;align-items:center;gap:8px;font-size:0.8rem">
-              <span style="color:var(--text-muted);width:110px">Gestion admin</span>
-              <div class="fit-bar"><div class="fit-fill" style="width:100%"></div></div>
-              <span style="font-weight:700;color:var(--navy);width:30px">Expert</span>
-            </div>
-            <div style="display:flex;align-items:center;gap:8px;font-size:0.8rem">
-              <span style="color:var(--text-muted);width:110px">Organisation</span>
-              <div class="fit-bar"><div class="fit-fill" style="width:100%"></div></div>
-              <span style="font-weight:700;color:var(--navy);width:30px">Expert</span>
-            </div>
-            <div style="display:flex;align-items:center;gap:8px;font-size:0.8rem">
-              <span style="color:var(--text-muted);width:110px">Odoo ERP</span>
-              <div class="fit-bar"><div class="fit-fill" style="width:75%"></div></div>
-              <span style="font-weight:700;color:var(--navy);width:30px">Avancé</span>
-            </div>
+          <!-- Note compatibilité courte -->
+          <div style="background:var(--gold-pale);border-radius:6px;padding:8px 10px;margin-bottom:10px;font-size:0.78rem;color:var(--text);line-height:1.5;border-left:2px solid var(--gold)">
+            <strong style="color:var(--warning)">✦ IA :</strong> Profil Conscience élevée — idéal pour un manager qui délègue avec confiance. Naturellement fiable, s'intègre parfaitement dans une structure avec procédures claires.
           </div>
-          <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px">
-            <span class="skill-pill">Bilingue FR/EN</span>
-            <span class="skill-pill">Asana</span>
-            <span class="skill-pill">Events corporate</span>
-            <span class="skill-pill">3 ans exp.</span>
+          <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:12px">
+            <div style="display:flex;align-items:center;gap:8px;font-size:0.8rem"><span style="color:var(--text-muted);width:110px">Gestion admin</span><div class="fit-bar"><div class="fit-fill" style="width:100%"></div></div><span style="font-weight:700;color:var(--navy);width:30px">Expert</span></div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:0.8rem"><span style="color:var(--text-muted);width:110px">Organisation</span><div class="fit-bar"><div class="fit-fill" style="width:100%"></div></div><span style="font-weight:700;color:var(--navy);width:30px">Expert</span></div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:0.8rem"><span style="color:var(--text-muted);width:110px">Odoo ERP</span><div class="fit-bar"><div class="fit-fill" style="width:75%"></div></div><span style="font-weight:700;color:var(--navy);width:30px">Avancé</span></div>
+          </div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px">
+            <span class="skill-pill">Bilingue FR/EN</span><span class="skill-pill">Asana</span><span class="skill-pill">Events corporate</span><span class="skill-pill">3 ans exp.</span>
           </div>
           <div style="display:flex;gap:8px">
             <button class="btn btn-ghost btn-sm" style="flex:1" onclick="event.stopPropagation();saveCandidate(this)">🔖 Sauvegarder</button>
@@ -3891,42 +4093,38 @@ Amara
 
         <!-- Candidat 2 -->
         <div class="candidate-card" onclick="openCandidateProfile(1)">
-          <div style="display:flex;align-items:flex-start;gap:14px;margin-bottom:14px">
-            <div class="candidate-avatar-lg" style="background:linear-gradient(135deg,#2E7D52,#4CAF50)">FD</div>
+          <div style="display:flex;align-items:flex-start;gap:14px;margin-bottom:12px">
+            <div style="position:relative">
+              <div class="candidate-avatar-lg" style="background:linear-gradient(135deg,#2E7D52,#4CAF50)">FD</div>
+              <div style="position:absolute;bottom:-1px;right:-1px;width:12px;height:12px;border-radius:50%;background:var(--gold);border:2px solid white" title="Actif il y a 2 jours"></div>
+            </div>
             <div style="flex:1">
-              <div style="display:flex;justify-content:space-between">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start">
                 <div>
-                  <div style="font-weight:700;color:var(--navy);font-size:0.95rem">Fatoumata D.</div>
-                  <div style="font-size:0.78rem;color:var(--text-muted)">Assistante DG · Abidjan</div>
+                  <div style="display:flex;align-items:center;gap:6px">
+                    <div style="font-weight:700;color:var(--navy);font-size:0.95rem">Fatoumata D.</div>
+                    <span style="background:var(--success-bg);color:var(--success);font-size:0.62rem;font-weight:700;padding:1px 6px;border-radius:99px">✓ Vérifié IA</span>
+                  </div>
+                  <div style="font-size:0.78rem;color:var(--text-muted)">Assistante DG · Abidjan · Profil 88% complété</div>
                 </div>
                 <div class="offre-match" style="color:var(--navy);background:var(--info-bg)">87% fit</div>
               </div>
-              <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap">
+              <div style="display:flex;gap:6px;margin-top:6px;flex-wrap:wrap">
                 <span class="badge badge-green" style="font-size:0.68rem">Disponible avril 2026</span>
+                <span style="font-size:0.68rem;color:var(--gold);align-self:center">🕐 Actif il y a 2 jours</span>
               </div>
             </div>
           </div>
-          <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:14px">
-            <div style="display:flex;align-items:center;gap:8px;font-size:0.8rem">
-              <span style="color:var(--text-muted);width:110px">Gestion admin</span>
-              <div class="fit-bar"><div class="fit-fill" style="width:75%"></div></div>
-              <span style="font-weight:700;color:var(--navy);width:40px">Confirmé</span>
-            </div>
-            <div style="display:flex;align-items:center;gap:8px;font-size:0.8rem">
-              <span style="color:var(--text-muted);width:110px">Rédaction FR</span>
-              <div class="fit-bar"><div class="fit-fill" style="width:100%"></div></div>
-              <span style="font-weight:700;color:var(--navy);width:40px">Expert</span>
-            </div>
-            <div style="display:flex;align-items:center;gap:8px;font-size:0.8rem">
-              <span style="color:var(--text-muted);width:110px">Budget</span>
-              <div class="fit-bar"><div class="fit-fill" style="width:50%"></div></div>
-              <span style="font-weight:700;color:var(--navy);width:40px">Interméd.</span>
-            </div>
+          <div style="background:var(--gold-pale);border-radius:6px;padding:8px 10px;margin-bottom:10px;font-size:0.78rem;color:var(--text);line-height:1.5;border-left:2px solid var(--gold)">
+            <strong style="color:var(--warning)">✦ IA :</strong> Forte Extraversion — s'épanouit dans les équipes collaboratives. Excellente représentante d'une direction, à l'aise dans les rôles avec visibilité externe.
           </div>
-          <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px">
-            <span class="skill-pill">5 ans exp.</span>
-            <span class="skill-pill">SAP</span>
-            <span class="skill-pill">Secteur bancaire</span>
+          <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:12px">
+            <div style="display:flex;align-items:center;gap:8px;font-size:0.8rem"><span style="color:var(--text-muted);width:110px">Rédaction FR</span><div class="fit-bar"><div class="fit-fill" style="width:100%"></div></div><span style="font-weight:700;color:var(--navy);width:40px">Expert</span></div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:0.8rem"><span style="color:var(--text-muted);width:110px">Gestion admin</span><div class="fit-bar"><div class="fit-fill" style="width:75%"></div></div><span style="font-weight:700;color:var(--navy);width:40px">Confirmé</span></div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:0.8rem"><span style="color:var(--text-muted);width:110px">Budget</span><div class="fit-bar"><div class="fit-fill" style="width:50%"></div></div><span style="font-weight:700;color:var(--navy);width:40px">Interméd.</span></div>
+          </div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px">
+            <span class="skill-pill">5 ans exp.</span><span class="skill-pill">SAP</span><span class="skill-pill">Secteur bancaire</span>
           </div>
           <div style="display:flex;gap:8px">
             <button class="btn btn-ghost btn-sm" style="flex:1" onclick="event.stopPropagation();saveCandidate(this)">🔖 Sauvegarder</button>
@@ -3936,37 +4134,34 @@ Amara
 
         <!-- Candidat 3 -->
         <div class="candidate-card" onclick="openCandidateProfile(2)">
-          <div style="display:flex;align-items:flex-start;gap:14px;margin-bottom:14px">
-            <div class="candidate-avatar-lg" style="background:linear-gradient(135deg,#B45309,#D97706)">MO</div>
+          <div style="display:flex;align-items:flex-start;gap:14px;margin-bottom:12px">
+            <div style="position:relative">
+              <div class="candidate-avatar-lg" style="background:linear-gradient(135deg,#B45309,#D97706)">MO</div>
+              <div style="position:absolute;bottom:-1px;right:-1px;width:12px;height:12px;border-radius:50%;background:var(--border);border:2px solid white" title="Actif il y a 5 jours"></div>
+            </div>
             <div style="flex:1">
-              <div style="display:flex;justify-content:space-between">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start">
                 <div>
                   <div style="font-weight:700;color:var(--navy);font-size:0.95rem">Moussa O.</div>
-                  <div style="font-size:0.78rem;color:var(--text-muted)">Coordinateur Admin · Abidjan</div>
+                  <div style="font-size:0.78rem;color:var(--text-muted)">Coordinateur Admin · Abidjan · Profil 74% complété</div>
                 </div>
                 <div class="offre-match" style="color:var(--text-muted);background:#F3F4F6">79% fit</div>
               </div>
-              <div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap">
+              <div style="display:flex;gap:6px;margin-top:6px;flex-wrap:wrap">
                 <span class="badge badge-gray" style="font-size:0.68rem">En poste · À l'écoute</span>
+                <span style="font-size:0.68rem;color:var(--text-muted);align-self:center">🕐 Il y a 5 jours</span>
               </div>
             </div>
           </div>
-          <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:14px">
-            <div style="display:flex;align-items:center;gap:8px;font-size:0.8rem">
-              <span style="color:var(--text-muted);width:110px">Gestion projet</span>
-              <div class="fit-bar"><div class="fit-fill" style="width:75%"></div></div>
-              <span style="font-weight:700;color:var(--navy);width:40px">Confirmé</span>
-            </div>
-            <div style="display:flex;align-items:center;gap:8px;font-size:0.8rem">
-              <span style="color:var(--text-muted);width:110px">Logistique</span>
-              <div class="fit-bar"><div class="fit-fill" style="width:100%"></div></div>
-              <span style="font-weight:700;color:var(--navy);width:40px">Expert</span>
-            </div>
+          <div style="background:#F9F9F8;border-radius:6px;padding:8px 10px;margin-bottom:10px;font-size:0.78rem;color:var(--text);line-height:1.5;border-left:2px solid var(--border)">
+            <strong style="color:var(--text-muted)">✦ IA :</strong> Haute Ouverture — profil autonome et débrouillard. Performant sur les missions avec initiative. Moins adapté aux rôles très procéduriers.
           </div>
-          <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px">
-            <span class="skill-pill">4 ans exp.</span>
-            <span class="skill-pill">Asana</span>
-            <span class="skill-pill">Événementiel</span>
+          <div style="display:flex;flex-direction:column;gap:8px;margin-bottom:12px">
+            <div style="display:flex;align-items:center;gap:8px;font-size:0.8rem"><span style="color:var(--text-muted);width:110px">Logistique</span><div class="fit-bar"><div class="fit-fill" style="width:100%"></div></div><span style="font-weight:700;color:var(--navy);width:40px">Expert</span></div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:0.8rem"><span style="color:var(--text-muted);width:110px">Gestion projet</span><div class="fit-bar"><div class="fit-fill" style="width:75%"></div></div><span style="font-weight:700;color:var(--navy);width:40px">Confirmé</span></div>
+          </div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px">
+            <span class="skill-pill">4 ans exp.</span><span class="skill-pill">Asana</span><span class="skill-pill">Événementiel</span>
           </div>
           <div style="display:flex;gap:8px">
             <button class="btn btn-ghost btn-sm" style="flex:1" onclick="event.stopPropagation();saveCandidate(this)">🔖 Sauvegarder</button>
@@ -4156,10 +4351,11 @@ function navigateTo(page) {
     'devplan': 'Plan de développement',
     'wishlist': 'Offres sauvegardées',
     'badges': 'Mes badges & progression',
-    'offres': 'Offres du jour'
+    'offres': 'Offres du jour',
+    'entreprises': 'Entreprises & Affinité'
   };
   const topbar = document.getElementById('topbar-title');
-  if (topbar) topbar.textContent = titles[page] || page;
+  if (topbar) topbar.textContent = titles[page] || extraTitles[page] || page;
 
   // Update active nav
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
@@ -4401,8 +4597,58 @@ function calcSalary() {
   const min = Math.round(base[0] * mult / 10) * 10;
   const med = Math.round(base[1] * mult / 10) * 10;
   const max = Math.round(base[2] * mult / 10) * 10;
+
   const rangeEl = document.getElementById('sal-range');
   if (rangeEl) rangeEl.textContent = `${(min*1000).toLocaleString('fr-FR')} – ${(max*1000).toLocaleString('fr-FR')} FCFA`;
+
+  const salResults = document.getElementById('salary-results');
+  if (!salResults) return;
+
+  const posteLabels = {om:'Office Manager',ad:'Assistante de Direction',ea:'Executive Assistant',coord:'Coordinatrice Administrative',ra:'Responsable Administratif'};
+  const secteurLabels = {telecom:'Télécoms',banque:'Banque & Finance',industrie:'Industrie & FMCG',service:'Services & Conseil',energie:'Énergie & Pétrole'};
+
+  // Update subtitle
+  const subtitle = salResults.querySelector('.salary-result div:first-child');
+  if (subtitle) subtitle.textContent = `${posteLabels[poste]||poste} · ${secteurLabels[secteur]||secteur} · ${exp} ans · Abidjan`;
+
+  // Update median text
+  const medLine = salResults.querySelectorAll('.salary-result > div')[3];
+  if (medLine) medLine.textContent = `Médiane : ${(med*1000).toLocaleString('fr-FR')} FCFA/mois`;
+
+  // Update bar labels
+  const barLabels = salResults.querySelector('.salary-bar-wrap div:first-child');
+  if (barLabels) {
+    const spans = barLabels.querySelectorAll('span');
+    if (spans[0]) spans[0].textContent = `${min}k (min)`;
+    if (spans[1]) spans[1].textContent = `${med}k (médiane)`;
+    if (spans[2]) spans[2].textContent = `${max}k (max)`;
+  }
+
+  // Update marker position
+  const marker = salResults.querySelector('.salary-bar-marker');
+  if (marker && offre > 0) {
+    const pct = Math.min(95, Math.max(5, Math.round(((offre/1000 - min) / (max - min)) * 100)));
+    marker.style.left = pct + '%';
+    marker.title = `Votre offre : ${offre.toLocaleString('fr-FR')} FCFA`;
+  }
+
+  // Update offer analysis line
+  const offerLine = salResults.querySelector('.salary-bar-wrap > div:last-child');
+  if (offerLine && offre > 0) {
+    const medFCFA = med * 1000;
+    const pos = offre < medFCFA ? 'sous la médiane du marché' : 'au-dessus de la médiane du marché';
+    offerLine.innerHTML = `📍 Votre offre de ${offre.toLocaleString('fr-FR')} FCFA se situe <strong>${pos}</strong>`;
+  }
+
+  // Update negotiation recommendation
+  const negoRec = salResults.querySelector('.nego-card .warning-box div:last-child, .nego-card > div:nth-child(2) > div:last-child');
+  const minFCFA = min * 1000;
+  const medFCFA = med * 1000;
+  if (offre > 0 && offre < medFCFA) {
+    const pctBelow = Math.round(((medFCFA - offre) / medFCFA) * 100);
+    const negoDiv = salResults.querySelector('.nego-card > div:nth-child(2) > div:last-child');
+    if (negoDiv) negoDiv.textContent = `L'offre de ${offre.toLocaleString('fr-FR')} FCFA est ${pctBelow}% sous la médiane du marché pour ce profil. Vous avez des arguments solides pour négocier.`;
+  }
 }
 
 
@@ -4454,7 +4700,7 @@ function copyTemplate(id) {
   setTimeout(() => toast.classList.add('hidden'), 2200);
 }
 
-// Mettre à jour les titres dans la nav pour les nouveaux modules
+// Titres supplémentaires pour les nouveaux modules (fusionnés dans navigateTo)
 const extraTitles = {
   'reseau': 'Réseau & Contacts',
   'objectifs': 'Objectifs carrière',
@@ -4465,7 +4711,6 @@ const extraTitles = {
   'devplan': 'Plan de développement',
   'wishlist': 'Offres sauvegardées'
 };
-const origNavigateTo = navigateTo;
 
 // ================================================================
 //  ACHIEVEMENTS
@@ -4732,25 +4977,34 @@ function recNavigateTo(page) {
 // Données candidats pour la modale recruteur
 const candidatesData = [
   {
-    initials:'AK', name:'Amara K.', title:'Office Manager', location:'Abidjan', fit:94, availability:'Disponible maintenant', experience:'3 ans',
+    initials:'AK', name:'Amara K.', title:'Office Manager', location:'Abidjan', fit:94,
+    availability:'Disponible maintenant', experience:'3 ans',
+    activity:'Connecté(e) aujourd\'hui', profileCompletion:96, verified:true,
     personality:'Chemin de Vie 7 · Conscience 82 · Agréabilité 88',
     positioning:'Profil analytique et rigoureux, naturellement fiable. Excelle dans les environnements structurés qui valorisent la précision.',
+    compatNote:'Ce profil Chemin de Vie 7 à haute Conscience s\'intégrera parfaitement dans une structure avec des procédures claires et un manager qui délègue avec confiance. Très adapté aux environnements qui valorisent la qualité sur la quantité. Moins à l\'aise dans des rôles de représentation externe très extravertis.',
     skills:[{name:'Gestion administrative',level:'Expert',pct:100},{name:'Gestion d\'agenda complexe',level:'Expert',pct:100},{name:'Odoo ERP',level:'Avancé',pct:75},{name:'Organisation événements',level:'Confirmé',pct:65},{name:'Anglais B2',level:'Avancé',pct:70}],
     softSkills:['Organisation','Rigueur','Intelligence émotionnelle','Fiabilité','Écoute active'],
     achievements:['Zéro collision d\'agenda sur 12 mois — 40+ réunions/semaine','Implémentation Odoo RH pour 45 collaborateurs (-60% temps de traitement)','Séminaire annuel 120 participants, 8M FCFA, 0 incident']
   },
   {
-    initials:'FD', name:'Fatoumata D.', title:'Assistante DG', location:'Abidjan', fit:87, availability:'Disponible avril 2026', experience:'5 ans',
+    initials:'FD', name:'Fatoumata D.', title:'Assistante DG', location:'Abidjan', fit:87,
+    availability:'Disponible avril 2026', experience:'5 ans',
+    activity:'Connecté(e) il y a 2 jours', profileCompletion:88, verified:true,
     personality:'Chemin de Vie 3 · Conscience 76 · Extraversion 68',
     positioning:'Profil communicant et organisé, à l\'aise avec les environnements dynamiques. Fort en rédaction et représentation.',
+    compatNote:'Chemin de Vie 3 à forte Extraversion — ce profil s\'épanouit dans les équipes collaboratives et les rôles avec visibilité. Excellente pour représenter une direction en réunion ou à l\'externe. Favorisez un management qui donne du feedback régulier.',
     skills:[{name:'Rédaction professionnelle',level:'Expert',pct:100},{name:'Gestion administrative',level:'Confirmé',pct:75},{name:'SAP',level:'Avancé',pct:75},{name:'Budget',level:'Intermédiaire',pct:50}],
     softSkills:['Communication','Présentation','Adaptabilité','Travail en équipe'],
     achievements:['5 ans en assistanat bancaire (secteur BPCE)','Coordination de 3 comités de direction mensuels','Rédaction de 100+ notes de synthèse en FR/EN']
   },
   {
-    initials:'MO', name:'Moussa O.', title:'Coordinateur Administratif', location:'Abidjan', fit:79, availability:'En poste · À l\'écoute', experience:'4 ans',
+    initials:'MO', name:'Moussa O.', title:'Coordinateur Administratif', location:'Abidjan', fit:79,
+    availability:'En poste · À l\'écoute', experience:'4 ans',
+    activity:'Connecté(e) il y a 5 jours', profileCompletion:74, verified:false,
     personality:'Chemin de Vie 1 · Ouverture 85 · Conscience 72',
     positioning:'Profil orienté action et logistique. Autonome et débrouillard, bon dans les environnements qui bougent vite.',
+    compatNote:'Chemin de Vie 1 à haute Ouverture — profil entrepreneur dans l\'âme, efficace dans les missions avec autonomie et variété. Sera moins productif dans un rôle très répétitif ou fortement contraint. Idéal pour des postes qui demandent de l\'initiative.',
     skills:[{name:'Logistique',level:'Expert',pct:100},{name:'Gestion de projet',level:'Confirmé',pct:75},{name:'Asana',level:'Avancé',pct:75},{name:'Budget',level:'Confirmé',pct:65}],
     softSkills:['Autonomie','Réactivité','Organisation','Gestion du stress'],
     achievements:['Coordination de 20+ événements B2B par an','Gestion d\'une flotte de 12 véhicules de service','Implémentation d\'un système de ticketing interne']
@@ -4759,37 +5013,58 @@ const candidatesData = [
 
 function openCandidateProfile(idx) {
   const c = candidatesData[idx];
+  const verifiedBadge = c.verified
+    ? `<span style="background:var(--success-bg);color:var(--success);font-size:0.68rem;font-weight:700;padding:2px 8px;border-radius:99px;border:1px solid rgba(46,125,82,0.2)">✓ Profil vérifié IA</span>`
+    : `<span style="background:#F3F4F6;color:var(--text-muted);font-size:0.68rem;font-weight:700;padding:2px 8px;border-radius:99px">Profil partiel</span>`;
+
   document.getElementById('candidate-profile-content').innerHTML = `
     <div style="padding:32px">
       <button onclick="closeCandidateProfile()" style="position:absolute;top:16px;right:16px;border:none;background:var(--bg);border-radius:8px;padding:6px 12px;cursor:pointer;font-size:0.82rem;color:var(--text-muted)">✕ Fermer</button>
 
-      <!-- Header profil -->
-      <div style="display:flex;align-items:flex-start;gap:18px;margin-bottom:24px;padding-bottom:20px;border-bottom:1px solid var(--border)">
-        <div class="candidate-avatar-lg" style="width:64px;height:64px;font-size:1.1rem">${c.initials}</div>
+      <!-- Header -->
+      <div style="display:flex;align-items:flex-start;gap:18px;margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--border)">
+        <div style="position:relative">
+          <div class="candidate-avatar-lg" style="width:64px;height:64px;font-size:1.1rem">${c.initials}</div>
+          <div style="position:absolute;bottom:-2px;right:-2px;width:14px;height:14px;border-radius:50%;background:var(--success);border:2px solid white"></div>
+        </div>
         <div style="flex:1">
-          <h2 style="font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--navy)">${c.name}</h2>
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:4px">
+            <h2 style="font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--navy)">${c.name}</h2>
+            ${verifiedBadge}
+          </div>
           <div style="font-size:0.85rem;color:var(--text-muted)">${c.title} · ${c.location} · ${c.experience} d'expérience</div>
           <div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap">
             <span class="badge badge-green">${c.availability}</span>
             <span class="badge badge-gold">✦ ${c.personality.split('·')[0].trim()}</span>
+            <span style="font-size:0.72rem;color:var(--text-muted);align-self:center">🕐 ${c.activity}</span>
           </div>
         </div>
-        <div style="text-align:center;background:var(--gold-pale);padding:14px 18px;border-radius:var(--radius-sm);border:1px solid rgba(212,168,67,0.3)">
-          <div style="font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;color:var(--navy)">${c.fit}%</div>
-          <div style="font-size:0.72rem;color:var(--text-muted)">Correspondance</div>
+        <div style="text-align:center">
+          <div style="background:var(--gold-pale);padding:12px 16px;border-radius:var(--radius-sm);border:1px solid rgba(212,168,67,0.3);margin-bottom:8px">
+            <div style="font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;color:var(--navy)">${c.fit}%</div>
+            <div style="font-size:0.68rem;color:var(--text-muted)">Correspondance</div>
+          </div>
+          <div style="font-size:0.72rem;color:var(--text-muted)">Profil complété à</div>
+          <div style="font-weight:700;color:var(--navy);font-size:0.88rem">${c.profileCompletion}%</div>
         </div>
       </div>
 
-      <!-- Positionnement IA -->
+      <!-- Note de compatibilité personnalité-poste -->
+      <div style="background:linear-gradient(135deg,var(--navy),var(--navy-light));border-radius:var(--radius-sm);padding:16px 18px;margin-bottom:20px;color:white">
+        <div style="font-size:0.72rem;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:8px">✦ Analyse IA — Compatibilité personnalité × votre poste</div>
+        <div style="font-size:0.85rem;color:rgba(255,255,255,0.9);line-height:1.7">${c.compatNote}</div>
+        <div style="font-size:0.75rem;color:rgba(255,255,255,0.45);margin-top:8px">${c.personality}</div>
+      </div>
+
+      <!-- Positionnement -->
       <div style="background:var(--info-bg);border-radius:var(--radius-sm);padding:14px 16px;margin-bottom:20px;border-left:3px solid var(--navy)">
-        <div style="font-size:0.72rem;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:4px">Lecture IA — Profil de personnalité</div>
+        <div style="font-size:0.72rem;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:4px">Profil professionnel</div>
         <div style="font-size:0.85rem;color:var(--text);line-height:1.7">${c.positioning}</div>
-        <div style="font-size:0.78rem;color:var(--text-muted);margin-top:6px">${c.personality}</div>
       </div>
 
       <!-- Compétences validées -->
       <div style="margin-bottom:20px">
-        <div style="font-family:'Playfair Display',serif;font-size:0.95rem;color:var(--navy);margin-bottom:12px">Compétences validées par l'IA</div>
+        <div style="font-family:'Playfair Display',serif;font-size:0.95rem;color:var(--navy);margin-bottom:12px">Compétences validées par l'IA — pas auto-déclarées</div>
         <div style="display:flex;flex-direction:column;gap:10px">
           ${c.skills.map(s => `
             <div>
@@ -4810,7 +5085,7 @@ function openCandidateProfile(idx) {
         </div>
       </div>
 
-      <!-- Victoires professionnelles -->
+      <!-- Victoires -->
       <div style="margin-bottom:24px">
         <div style="font-family:'Playfair Display',serif;font-size:0.95rem;color:var(--navy);margin-bottom:10px">Victoires professionnelles</div>
         <div style="display:flex;flex-direction:column;gap:8px">
@@ -4823,23 +5098,37 @@ function openCandidateProfile(idx) {
 
       <!-- Actions -->
       <div style="display:flex;gap:10px;padding-top:16px;border-top:1px solid var(--border)">
-        <button class="btn btn-primary" onclick="closeCandidateProfile()">✉️ Contacter ce candidat</button>
+        <button class="btn btn-primary" onclick="contactCandidate()">✉️ Contacter ce candidat</button>
         <button class="btn btn-ghost" onclick="saveCandidate(this)">🔖 Sauvegarder</button>
         <button class="btn btn-ghost" style="margin-left:auto" onclick="closeCandidateProfile()">Fermer</button>
       </div>
     </div>`;
+
   const modal = document.getElementById('candidate-profile-modal');
   modal.classList.remove('hidden');
 }
 
 function closeCandidateProfile(event) {
-  if (event && event.target !== document.getElementById('candidate-profile-modal')) return;
-  document.getElementById('candidate-profile-modal').classList.add('hidden');
+  // Allow closing from overlay click or direct button click
+  if (event && event.currentTarget === event.target) {
+    document.getElementById('candidate-profile-modal').classList.add('hidden');
+  } else if (!event) {
+    document.getElementById('candidate-profile-modal').classList.add('hidden');
+  }
 }
 
 function saveCandidate(btn) {
   if (btn) { btn.textContent = '✅ Sauvegardé'; btn.disabled = true; }
   showBadgeToast('🔖', 'Profil sauvegardé !', 'Retrouvez-le dans "Profils sauvegardés"');
+}
+
+function contactCandidate() {
+  closeCandidateProfile();
+  showBadgeToast('✉️', 'Message envoyé !', 'Le candidat sera notifié via Career OS');
+}
+
+function openEntrepriseDetail(id) {
+  showBadgeToast('🏢', 'Fiche entreprise', 'Dans la version réelle : page détail avec toutes les offres actives et la carte culturelle complète.');
 }
 
 function upgradeRecruiter() {
@@ -4883,8 +5172,6 @@ function setAuthMode(mode) {
   }
 }
 
-// Surcharge de showAuth pour gérer le mode recruteur
-const _baseShowAuth = showAuth;
 function showAuth(tab) {
   document.getElementById('view-landing').classList.add('hidden');
   document.getElementById('view-auth').classList.remove('hidden');
@@ -4901,11 +5188,18 @@ function showAuth(tab) {
 // ===============================================================
 // Init au chargement
 document.addEventListener('DOMContentLoaded', function() {
-  updateXPDisplay(currentXP);
+  // Afficher la landing page par défaut
   document.getElementById('view-landing').classList.remove('hidden');
   document.getElementById('view-auth').classList.add('hidden');
   document.getElementById('view-app').classList.add('hidden');
-  document.getElementById('view-recruiter').classList.add('hidden');
+  if (document.getElementById('view-recruiter')) document.getElementById('view-recruiter').classList.add('hidden');
+
+  // Initialiser l'affichage XP
+  updateXPDisplay(currentXP);
+
+  // Initialiser le mode auth par défaut (candidat / login)
+  setAuthMode('candidat');
+  switchTab('login');
 });
 </script>
 </body>
