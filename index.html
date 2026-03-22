@@ -1759,7 +1759,7 @@ Profil : Bac+3 minimum, 3 ans d'expérience, maîtrise des outils bureautiques, 
             <div style="text-align:center;margin-bottom:16px">
               <div style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--navy)">AMARA KONÉ</div>
               <div style="font-size:0.85rem;color:var(--text-muted)">Office Manager | Coordinatrice Administrative</div>
-              <div style="font-size:0.8rem;color:var(--text-muted)">Abidjan · <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3e5f535f4c5f105551505b7e59535f5752105d5153">[email&#160;protected]</a> · +225 07 xx xx xx · LinkedIn</div>
+              <div style="font-size:0.8rem;color:var(--text-muted)">Abidjan · amara.kone@gmail.com · +225 07 xx xx xx · LinkedIn</div>
             </div>
             <div class="cv-section-title">RÉSUMÉ DE PROFIL</div>
             <p style="font-size:0.83rem;line-height:1.7">Office Manager rigoureuse et polyvalente avec 3 ans d'expérience dans la gestion administrative de direction, la coordination inter-services et l'organisation d'événements corporate. Réputée pour ma fiabilité, mon sens du détail et ma capacité à gérer plusieurs priorités simultanément. Bilingue français-anglais (B2 certifié). Maîtrise d'Odoo ERP, Asana et de la suite Microsoft Office.</p>
@@ -2594,7 +2594,7 @@ Vous trouverez en pièce jointe mon CV et ma lettre de motivation adaptée à vo
 Je reste disponible pour tout entretien à votre convenance.
 
 Cordialement,
-Amara Koné | <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="81e0ece0f3e0afeaeeefe4c1e6ece0e8edafe2eeec">[email&#160;protected]</a> | +225 07 xx xx xx
+Amara Koné | amara.kone@gmail.com | +225 07 xx xx xx
             </div>
           </div>
         </div>
@@ -3340,7 +3340,7 @@ Amara
   </div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 // ================================================================
 //  STATE
 // ================================================================
@@ -3379,7 +3379,12 @@ function navigateTo(page) {
     'reseau': 'Réseau & Contacts',
     'objectifs': 'Objectifs carrière',
     'templates': 'Templates messages',
-    'stats': 'Statistiques'
+    'stats': 'Statistiques',
+    'achievements': 'Victoires professionnelles',
+    'skills': 'Carte des compétences',
+    'devplan': 'Plan de développement',
+    'wishlist': 'Offres sauvegardées',
+    'badges': 'Mes badges & progression'
   };
   const topbar = document.getElementById('topbar-title');
   if (topbar) topbar.textContent = titles[page] || page;
@@ -3777,7 +3782,6 @@ function openDevForm() { alert('Dans la version réelle : formulaire pour ajoute
 //  GAMIFICATION
 // ================================================================
 
-// Données XP par action et niveaux
 const XP_ACTIONS = {
   personality_done: 150,
   bilan_done: 200,
@@ -3790,29 +3794,24 @@ const XP_ACTIONS = {
 };
 
 const LEVELS = [
-  { level: 1, name: 'Débutant',        xp: 0    },
-  { level: 2, name: 'Actif',           xp: 200  },
-  { level: 3, name: 'En progression',  xp: 450  },
-  { level: 4, name: 'Candidat Confirmé', xp: 1000 },
-  { level: 5, name: 'Expert',          xp: 2000 }
+  { level: 1, name: 'Débutant',           xp: 0    },
+  { level: 2, name: 'Actif',              xp: 200  },
+  { level: 3, name: 'En progression',     xp: 450  },
+  { level: 4, name: 'Candidat Confirmé',  xp: 1000 },
+  { level: 5, name: 'Expert',             xp: 2000 }
 ];
 
-// État XP actuel (simulé pour la démo à 680 XP = niveau 3)
 let currentXP = 680;
 
 function getLevelFromXP(xp) {
   let current = LEVELS[0];
-  for (const lvl of LEVELS) {
-    if (xp >= lvl.xp) current = lvl;
-  }
+  for (const lvl of LEVELS) { if (xp >= lvl.xp) current = lvl; }
   return current;
 }
 
 function getNextLevel(xp) {
-  for (const lvl of LEVELS) {
-    if (lvl.xp > xp) return lvl;
-  }
-  return null; // déjà au max
+  for (const lvl of LEVELS) { if (lvl.xp > xp) return lvl; }
+  return null;
 }
 
 function updateXPDisplay(xp) {
@@ -3820,69 +3819,46 @@ function updateXPDisplay(xp) {
   const next = getNextLevel(xp);
   const pct = next ? Math.round(((xp - lvl.xp) / (next.xp - lvl.xp)) * 100) : 100;
   const remaining = next ? next.xp - xp : 0;
-
-  // Sidebar
-  const levelLabel = document.getElementById('xp-level-label');
-  const pointsLabel = document.getElementById('xp-points-label');
-  const fill = document.getElementById('xp-fill');
-  const nextLabel = document.getElementById('xp-next-label');
-  if (levelLabel) levelLabel.textContent = `✦ Niveau ${lvl.level} — ${lvl.name}`;
-  if (pointsLabel) pointsLabel.textContent = `${xp} / ${next ? next.xp : xp} XP`;
-  if (fill) fill.style.width = pct + '%';
-  if (nextLabel) nextLabel.textContent = next
+  const el = {
+    levelLabel : document.getElementById('xp-level-label'),
+    pointsLabel: document.getElementById('xp-points-label'),
+    fill       : document.getElementById('xp-fill'),
+    nextLabel  : document.getElementById('xp-next-label')
+  };
+  if (el.levelLabel)  el.levelLabel.textContent  = `✦ Niveau ${lvl.level} — ${lvl.name}`;
+  if (el.pointsLabel) el.pointsLabel.textContent = `${xp} / ${next ? next.xp : xp} XP`;
+  if (el.fill)        el.fill.style.width        = pct + '%';
+  if (el.nextLabel)   el.nextLabel.textContent   = next
     ? `${remaining} XP pour atteindre "${next.name}"`
     : '🏆 Niveau maximum atteint !';
 }
 
-// Ajouter des XP avec animation et toast
 function addXP(action, badgeIcon, badgeName, badgeDesc) {
   const gain = XP_ACTIONS[action] || 50;
   currentXP += gain;
   updateXPDisplay(currentXP);
-
-  // Toast XP
   showBadgeToast(badgeIcon || '⚡', `+${gain} XP — ${badgeName || 'Action complétée'}`, badgeDesc || '');
 }
 
-// Toast de badge
 function showBadgeToast(icon, title, desc) {
   const toast = document.getElementById('badge-toast');
-  const toastIcon = document.getElementById('badge-toast-icon');
-  const toastTitle = document.getElementById('badge-toast-title');
-  const toastDesc = document.getElementById('badge-toast-desc');
   if (!toast) return;
-  toastIcon.textContent = icon;
-  toastTitle.textContent = title;
-  toastDesc.textContent = desc;
+  document.getElementById('badge-toast-icon').textContent  = icon;
+  document.getElementById('badge-toast-title').textContent = title;
+  document.getElementById('badge-toast-desc').textContent  = desc;
   toast.classList.add('show');
   setTimeout(() => toast.classList.remove('show'), 3200);
 }
 
-// Déclencher des XP depuis certaines pages (ex: après génération portrait)
-const _origGeneratePortrait = typeof generatePortrait === 'function' ? generatePortrait : null;
-
-// Init au chargement : afficher le bon état XP
-document.addEventListener('DOMContentLoaded', () => {
-  updateXPDisplay(currentXP);
-  // Ajouter les titres des nouvelles pages dans navigateTo
-  const _origNav = navigateTo;
-  // déjà pris en charge via extraTitles
-});
-
-// Patch navigateTo pour déclencher XP sur certaines pages
-const _patchedNav = navigateTo;
-window.navigateTo = function(page) {
-  _patchedNav(page);
-  // XP contextuel selon la page visitée
-  if (page === 'badges') {
-    // Rien — juste afficher
-  }
-  // Mise à jour titre pour la page badges
-  const allTitles = Object.assign({
-    badges: 'Mes badges & progression'
-  }, typeof extraTitles !== 'undefined' ? extraTitles : {});
-  const topbar = document.getElementById('topbar-title');
-  if (topbar && allTitles[page]) topbar.textContent = allTitles[page];
-};
-
 // ===============================================================
+// Init au chargement
+document.addEventListener('DOMContentLoaded', function() {
+  updateXPDisplay(currentXP);
+  // Afficher uniquement la landing au démarrage
+  document.getElementById('view-landing').classList.remove('hidden');
+  document.getElementById('view-auth').classList.add('hidden');
+  document.getElementById('view-app').classList.add('hidden');
+});
+</script>
+</body>
+</html>
