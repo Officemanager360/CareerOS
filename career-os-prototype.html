@@ -1,0 +1,2283 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Career OS — Votre système d'exploitation de carrière</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ===================================
+   1. VARIABLES & RESET
+=================================== */
+:root {
+  --navy: #1E3A5F;
+  --navy-light: #2B5080;
+  --navy-dark: #152C47;
+  --gold: #D4A843;
+  --gold-light: #E8C76A;
+  --gold-pale: #FBF3DF;
+  --bg: #F8F7F4;
+  --white: #FFFFFF;
+  --text: #2D2D2D;
+  --text-muted: #7A7670;
+  --border: #E8E5DF;
+  --success: #2E7D52;
+  --success-bg: #EAF5EE;
+  --warning: #B45309;
+  --warning-bg: #FEF3C7;
+  --danger: #B91C1C;
+  --danger-bg: #FEE2E2;
+  --info-bg: #EFF6FF;
+  --sidebar-w: 256px;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --shadow: 0 4px 24px rgba(30,58,95,0.08);
+  --shadow-lg: 0 12px 48px rgba(30,58,95,0.14);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 15px; scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+h1,h2,h3,h4 { font-family: 'Playfair Display', serif; line-height: 1.2; }
+a { color: var(--navy); text-decoration: none; }
+button { cursor: pointer; font-family: 'DM Sans', sans-serif; }
+input, select, textarea { font-family: 'DM Sans', sans-serif; }
+img { max-width: 100%; }
+
+/* ===================================
+   2. UTILITIES
+=================================== */
+.hidden { display: none !important; }
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.items-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+.justify-center { justify-content: center; }
+.gap-4 { gap: 16px; }
+.gap-2 { gap: 8px; }
+.text-muted { color: var(--text-muted); }
+.text-gold { color: var(--gold); }
+.text-navy { color: var(--navy); }
+.text-sm { font-size: 0.85rem; }
+.text-xs { font-size: 0.75rem; }
+.font-600 { font-weight: 600; }
+.mt-1 { margin-top: 4px; }
+.mt-2 { margin-top: 8px; }
+.mt-4 { margin-top: 16px; }
+.badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 3px 10px; border-radius: 99px;
+  font-size: 0.75rem; font-weight: 600; letter-spacing: 0.02em;
+}
+.badge-gold { background: var(--gold-pale); color: var(--warning); }
+.badge-blue { background: var(--info-bg); color: var(--navy); }
+.badge-green { background: var(--success-bg); color: var(--success); }
+.badge-red { background: var(--danger-bg); color: var(--danger); }
+.badge-gray { background: #F3F4F6; color: #4B5563; }
+
+/* ===================================
+   3. BUTTONS
+=================================== */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 10px 22px; border-radius: var(--radius-sm); border: none;
+  font-size: 0.9rem; font-weight: 600; transition: all 0.2s ease;
+  white-space: nowrap;
+}
+.btn-primary { background: var(--navy); color: var(--white); }
+.btn-primary:hover { background: var(--navy-light); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(30,58,95,0.25); }
+.btn-gold { background: var(--gold); color: var(--navy-dark); }
+.btn-gold:hover { background: var(--gold-light); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(212,168,67,0.35); }
+.btn-outline { background: transparent; color: var(--navy); border: 1.5px solid var(--navy); }
+.btn-outline:hover { background: var(--navy); color: white; }
+.btn-ghost { background: transparent; color: var(--text-muted); border: 1.5px solid var(--border); }
+.btn-ghost:hover { border-color: var(--navy); color: var(--navy); }
+.btn-danger { background: var(--danger); color: white; }
+.btn-sm { padding: 7px 16px; font-size: 0.8rem; }
+.btn-lg { padding: 14px 32px; font-size: 1rem; }
+.btn-full { width: 100%; }
+
+/* ===================================
+   4. FORM ELEMENTS
+=================================== */
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+.form-label { font-size: 0.85rem; font-weight: 600; color: var(--text); }
+.form-input {
+  padding: 10px 14px; border-radius: var(--radius-sm);
+  border: 1.5px solid var(--border); background: white;
+  font-size: 0.9rem; color: var(--text);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.form-input:focus {
+  outline: none; border-color: var(--navy);
+  box-shadow: 0 0 0 3px rgba(30,58,95,0.08);
+}
+.form-select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237A7670' stroke-width='1.5' fill='none'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 36px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-textarea { resize: vertical; min-height: 100px; }
+
+/* ===================================
+   5. CARDS
+=================================== */
+.card {
+  background: white; border-radius: var(--radius);
+  border: 1px solid var(--border); padding: 24px;
+  box-shadow: var(--shadow);
+}
+.card-sm { padding: 16px; }
+.stat-card {
+  background: white; border-radius: var(--radius);
+  padding: 22px; border: 1px solid var(--border);
+  position: relative; overflow: hidden;
+}
+.stat-card::before {
+  content: ''; position: absolute; top: 0; left: 0;
+  width: 4px; height: 100%; background: var(--gold);
+}
+.stat-number { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--navy); }
+.stat-label { font-size: 0.8rem; color: var(--text-muted); font-weight: 500; margin-top: 2px; }
+
+/* ===================================
+   6. PROGRESS / SCORE
+=================================== */
+.progress-bar {
+  height: 8px; background: var(--border); border-radius: 99px; overflow: hidden;
+}
+.progress-fill {
+  height: 100%; background: linear-gradient(90deg, var(--navy), var(--navy-light));
+  border-radius: 99px; transition: width 0.8s ease;
+}
+.score-ring {
+  width: 80px; height: 80px; border-radius: 50%;
+  background: conic-gradient(var(--gold) calc(var(--pct)*1%), var(--border) 0);
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+}
+.score-ring::after {
+  content: ''; position: absolute;
+  width: 60px; height: 60px; background: white; border-radius: 50%;
+}
+.score-ring-num {
+  position: relative; z-index: 1;
+  font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--navy);
+}
+
+/* ===================================
+   7. LANDING PAGE
+=================================== */
+#view-landing {
+  min-height: 100vh;
+}
+.landing-nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  padding: 16px 48px; display: flex; align-items: center; justify-content: space-between;
+  background: rgba(248,247,244,0.92); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border); z-index: 100;
+}
+.logo {
+  font-family: 'Playfair Display', serif; font-size: 1.3rem;
+  font-weight: 700; color: var(--navy); display: flex; align-items: center; gap: 8px;
+}
+.logo-dot { width: 8px; height: 8px; background: var(--gold); border-radius: 50%; }
+.landing-hero {
+  min-height: 100vh; display: flex; align-items: center;
+  padding: 120px 48px 80px;
+  background: radial-gradient(ellipse at 70% 50%, rgba(212,168,67,0.06) 0%, transparent 60%),
+              radial-gradient(ellipse at 20% 80%, rgba(30,58,95,0.05) 0%, transparent 50%);
+}
+.hero-content { max-width: 600px; }
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--gold-pale); color: var(--warning); padding: 6px 14px;
+  border-radius: 99px; font-size: 0.8rem; font-weight: 600;
+  border: 1px solid rgba(212,168,67,0.3); margin-bottom: 24px;
+}
+.hero-title {
+  font-size: 3.2rem; font-weight: 700; color: var(--navy);
+  line-height: 1.1; margin-bottom: 20px;
+}
+.hero-title em { color: var(--gold); font-style: italic; }
+.hero-subtitle { font-size: 1.05rem; color: var(--text-muted); margin-bottom: 36px; max-width: 500px; line-height: 1.7; }
+.hero-cta { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 48px; }
+.hero-proof { display: flex; align-items: center; gap: 16px; }
+.proof-avatars { display: flex; }
+.proof-avatar {
+  width: 36px; height: 36px; border-radius: 50%; border: 2px solid white;
+  background: linear-gradient(135deg, var(--navy), var(--navy-light));
+  margin-left: -10px; display: flex; align-items: center; justify-content: center;
+  color: white; font-size: 0.7rem; font-weight: 700;
+}
+.proof-avatar:first-child { margin-left: 0; }
+.hero-visual {
+  flex: 1; display: flex; justify-content: center; align-items: center;
+  padding-left: 48px;
+}
+.hero-card-stack { position: relative; width: 360px; height: 320px; }
+.hcard {
+  position: absolute; background: white; border-radius: 16px;
+  padding: 20px; box-shadow: var(--shadow-lg); border: 1px solid var(--border);
+  animation: float 4s ease-in-out infinite;
+}
+.hcard-1 { top: 0; left: 0; width: 240px; animation-delay: 0s; }
+.hcard-2 { top: 60px; right: 0; width: 200px; animation-delay: 0.8s; }
+.hcard-3 { bottom: 0; left: 40px; width: 220px; animation-delay: 1.6s; }
+@keyframes float {
+  0%,100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+/* Features section */
+.features-section { padding: 96px 48px; }
+.section-header { text-align: center; margin-bottom: 56px; }
+.section-label {
+  display: inline-block; color: var(--gold); font-size: 0.8rem;
+  font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.section-title { font-size: 2.2rem; color: var(--navy); margin-bottom: 12px; }
+.section-sub { color: var(--text-muted); max-width: 480px; margin: 0 auto; }
+.features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1100px; margin: 0 auto; }
+.feature-card {
+  padding: 28px; background: white; border-radius: var(--radius);
+  border: 1px solid var(--border); transition: all 0.3s ease;
+  position: relative; overflow: hidden;
+}
+.feature-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); border-color: var(--gold); }
+.feature-icon {
+  width: 52px; height: 52px; background: var(--gold-pale); border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem; margin-bottom: 16px;
+}
+.feature-title { font-family: 'Playfair Display', serif; font-size: 1.05rem; color: var(--navy); margin-bottom: 8px; }
+.feature-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
+
+/* Pricing section */
+.pricing-section { padding: 96px 48px; background: var(--navy); }
+.pricing-section .section-title { color: white; }
+.pricing-section .section-sub { color: rgba(255,255,255,0.6); }
+.pricing-section .section-label { color: var(--gold); }
+.pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 900px; margin: 0 auto; }
+.price-card {
+  background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius); padding: 32px; color: white;
+  position: relative; transition: all 0.3s;
+}
+.price-card:hover { background: rgba(255,255,255,0.1); }
+.price-card.featured {
+  background: white; color: var(--navy);
+  border-color: var(--gold); box-shadow: 0 0 0 2px var(--gold);
+}
+.price-featured-badge {
+  position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+  background: var(--gold); color: var(--navy-dark); padding: 4px 16px;
+  border-radius: 99px; font-size: 0.75rem; font-weight: 700;
+}
+.price-plan { font-size: 0.85rem; font-weight: 600; opacity: 0.7; margin-bottom: 8px; }
+.price-amount { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 700; }
+.price-period { font-size: 0.85rem; opacity: 0.6; }
+.price-features { margin: 24px 0; display: flex; flex-direction: column; gap: 10px; }
+.price-feat { font-size: 0.85rem; display: flex; align-items: center; gap: 8px; }
+.price-feat::before { content: '✓'; color: var(--gold); font-weight: 700; }
+.price-card.featured .price-feat::before { color: var(--success); }
+
+/* ===================================
+   8. AUTH PAGE
+=================================== */
+#view-auth {
+  min-height: 100vh; display: flex; align-items: center; justify-content: center;
+  background: var(--bg);
+  background-image: radial-gradient(ellipse at 20% 50%, rgba(30,58,95,0.05) 0%, transparent 50%);
+}
+.auth-card {
+  width: 420px; background: white; border-radius: 16px;
+  padding: 40px; box-shadow: var(--shadow-lg); border: 1px solid var(--border);
+}
+.auth-logo { text-align: center; margin-bottom: 28px; }
+.auth-tabs { display: flex; background: var(--bg); border-radius: var(--radius-sm); padding: 4px; margin-bottom: 28px; }
+.auth-tab {
+  flex: 1; padding: 8px; text-align: center; border-radius: 6px;
+  font-size: 0.85rem; font-weight: 600; cursor: pointer;
+  color: var(--text-muted); transition: all 0.2s;
+}
+.auth-tab.active { background: white; color: var(--navy); box-shadow: 0 1px 4px rgba(0,0,0,0.08); }
+
+/* ===================================
+   9. APP SHELL
+=================================== */
+#view-app { display: flex; min-height: 100vh; }
+
+/* Sidebar */
+.sidebar {
+  width: var(--sidebar-w); background: var(--navy-dark);
+  min-height: 100vh; display: flex; flex-direction: column;
+  position: fixed; top: 0; left: 0; z-index: 50;
+  transition: transform 0.3s ease;
+}
+.sidebar-header {
+  padding: 24px 20px 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.sidebar-logo {
+  font-family: 'Playfair Display', serif; font-size: 1.2rem;
+  font-weight: 700; color: white; display: flex; align-items: center; gap: 8px;
+}
+.sidebar-user {
+  display: flex; align-items: center; gap: 10px; margin-top: 14px;
+}
+.avatar {
+  width: 38px; height: 38px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; color: var(--navy-dark); font-size: 0.85rem; flex-shrink: 0;
+}
+.sidebar-user-name { font-size: 0.85rem; font-weight: 600; color: white; }
+.sidebar-user-sub { font-size: 0.72rem; color: rgba(255,255,255,0.45); margin-top: 1px; }
+.sidebar-nav { flex: 1; padding: 16px 12px; display: flex; flex-direction: column; gap: 2px; }
+.nav-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 12px; border-radius: 8px; cursor: pointer;
+  color: rgba(255,255,255,0.55); font-size: 0.88rem; font-weight: 500;
+  transition: all 0.2s; border: none; background: transparent; width: 100%; text-align: left;
+}
+.nav-item:hover { background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.85); }
+.nav-item.active { background: rgba(212,168,67,0.15); color: var(--gold); }
+.nav-icon { font-size: 1.1rem; width: 20px; text-align: center; flex-shrink: 0; }
+.nav-section-label {
+  font-size: 0.65rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  color: rgba(255,255,255,0.25); padding: 12px 12px 4px;
+}
+.sidebar-bottom { padding: 16px 12px; border-top: 1px solid rgba(255,255,255,0.08); }
+.sub-status {
+  background: rgba(212,168,67,0.1); border: 1px solid rgba(212,168,67,0.2);
+  border-radius: 8px; padding: 10px 12px;
+}
+.sub-status-label { font-size: 0.72rem; color: rgba(255,255,255,0.4); }
+.sub-status-val { font-size: 0.82rem; font-weight: 600; color: var(--gold); }
+
+/* Main content */
+.main-content {
+  margin-left: var(--sidebar-w);
+  flex: 1; min-height: 100vh; display: flex; flex-direction: column;
+}
+.topbar {
+  background: white; border-bottom: 1px solid var(--border);
+  padding: 16px 32px; display: flex; align-items: center; justify-content: space-between;
+  position: sticky; top: 0; z-index: 40;
+}
+.topbar-title { font-family: 'Playfair Display', serif; font-size: 1.25rem; color: var(--navy); }
+.page-content { padding: 32px; flex: 1; }
+.page-header { margin-bottom: 28px; }
+.page-title { font-size: 1.6rem; color: var(--navy); margin-bottom: 4px; }
+.page-sub { color: var(--text-muted); font-size: 0.9rem; }
+
+/* ===================================
+   10. DASHBOARD
+=================================== */
+.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 28px; }
+.dashboard-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 24px; }
+.activity-item {
+  display: flex; align-items: center; gap: 14px; padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+.activity-item:last-child { border-bottom: none; }
+.activity-dot {
+  width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
+  background: var(--gold);
+}
+.quick-actions { display: flex; flex-direction: column; gap: 10px; }
+.quick-action {
+  display: flex; align-items: center; gap: 12px; padding: 14px 16px;
+  border-radius: var(--radius-sm); border: 1.5px solid var(--border);
+  background: white; cursor: pointer; transition: all 0.2s;
+  text-align: left; width: 100%;
+}
+.quick-action:hover { border-color: var(--gold); background: var(--gold-pale); }
+.quick-action-icon { font-size: 1.2rem; }
+
+/* ===================================
+   11. ONBOARDING
+=================================== */
+.onboarding-wrap {
+  max-width: 760px; margin: 0 auto; padding: 40px 24px;
+}
+.steps-indicator { display: flex; align-items: center; gap: 0; margin-bottom: 48px; }
+.step-dot {
+  width: 36px; height: 36px; border-radius: 50%; border: 2px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.8rem; font-weight: 700; color: var(--text-muted);
+  background: white; position: relative; z-index: 1; flex-shrink: 0;
+  transition: all 0.3s;
+}
+.step-dot.active { border-color: var(--navy); background: var(--navy); color: white; }
+.step-dot.done { border-color: var(--gold); background: var(--gold); color: var(--navy-dark); }
+.step-line { flex: 1; height: 2px; background: var(--border); }
+.step-line.done { background: var(--gold); }
+.step-label {
+  font-size: 0.72rem; font-weight: 600; color: var(--text-muted); margin-top: 6px;
+  text-align: center; width: 80px; position: absolute;
+}
+.onboarding-card {
+  background: white; border-radius: 16px; padding: 40px;
+  box-shadow: var(--shadow); border: 1px solid var(--border);
+}
+.onboarding-title { font-size: 1.5rem; color: var(--navy); margin-bottom: 8px; }
+.onboarding-sub { color: var(--text-muted); margin-bottom: 32px; }
+/* Big Five slider */
+.bf-question { margin-bottom: 24px; }
+.bf-q-text { font-size: 0.9rem; font-weight: 500; margin-bottom: 10px; color: var(--text); }
+.bf-slider-row { display: flex; align-items: center; gap: 12px; }
+.bf-label-l, .bf-label-r { font-size: 0.75rem; color: var(--text-muted); width: 80px; }
+.bf-label-r { text-align: right; }
+.bf-slider {
+  flex: 1; -webkit-appearance: none; appearance: none;
+  height: 4px; border-radius: 99px; background: var(--border); outline: none;
+}
+.bf-slider::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%;
+  background: var(--navy); cursor: pointer; border: 2px solid white;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2); transition: background 0.2s;
+}
+.bf-slider::-webkit-slider-thumb:hover { background: var(--gold); }
+.bf-val { width: 24px; text-align: center; font-weight: 700; color: var(--navy); font-size: 0.9rem; }
+/* Soft skills MCQ */
+.sq-option {
+  display: flex; align-items: flex-start; gap: 12px; padding: 14px 16px;
+  border: 1.5px solid var(--border); border-radius: var(--radius-sm);
+  cursor: pointer; transition: all 0.2s; margin-bottom: 10px;
+  background: white;
+}
+.sq-option:hover { border-color: var(--navy); background: var(--info-bg); }
+.sq-option.selected { border-color: var(--gold); background: var(--gold-pale); }
+.sq-radio {
+  width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--border);
+  flex-shrink: 0; margin-top: 2px; transition: all 0.2s;
+  display: flex; align-items: center; justify-content: center;
+}
+.sq-option.selected .sq-radio { border-color: var(--gold); background: var(--gold); }
+.sq-option.selected .sq-radio::after { content: ''; width: 6px; height: 6px; background: white; border-radius: 50%; }
+
+/* Personality report */
+.report-block {
+  background: var(--gold-pale); border-left: 3px solid var(--gold);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0; padding: 16px 20px; margin-bottom: 16px;
+}
+.report-block-title { font-family: 'Playfair Display', serif; font-size: 0.95rem; color: var(--navy); margin-bottom: 6px; }
+.report-block-text { font-size: 0.88rem; color: var(--text); line-height: 1.7; }
+.big5-bars { display: flex; flex-direction: column; gap: 12px; margin: 20px 0; }
+.big5-row { display: flex; align-items: center; gap: 12px; }
+.big5-name { font-size: 0.8rem; font-weight: 600; width: 110px; color: var(--text); }
+.big5-bar { flex: 1; height: 8px; background: var(--border); border-radius: 99px; overflow: hidden; }
+.big5-fill { height: 100%; border-radius: 99px; }
+.big5-score { font-size: 0.8rem; font-weight: 700; color: var(--navy); width: 30px; text-align: right; }
+
+/* ===================================
+   12. BILAN DE COMPETENCES
+=================================== */
+.bilan-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.competency-item {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 0; border-bottom: 1px solid var(--border);
+}
+.competency-item:last-child { border-bottom: none; }
+.comp-name { font-size: 0.88rem; font-weight: 500; }
+.comp-level {
+  font-size: 0.75rem; font-weight: 700; padding: 3px 10px; border-radius: 99px;
+}
+.level-expert { background: var(--navy); color: white; }
+.level-confirme { background: var(--gold-pale); color: var(--warning); }
+.level-pratique { background: var(--success-bg); color: var(--success); }
+.level-notions { background: var(--border); color: var(--text-muted); }
+/* Chat interface */
+.chat-container {
+  border: 1px solid var(--border); border-radius: var(--radius);
+  overflow: hidden; display: flex; flex-direction: column; height: 480px;
+}
+.chat-messages {
+  flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 14px;
+  background: var(--bg);
+}
+.chat-msg { display: flex; gap: 10px; max-width: 85%; }
+.chat-msg.user { flex-direction: row-reverse; align-self: flex-end; }
+.chat-bubble {
+  padding: 12px 16px; border-radius: 14px; font-size: 0.87rem; line-height: 1.6;
+}
+.chat-msg.ai .chat-bubble { background: white; border: 1px solid var(--border); color: var(--text); border-radius: 4px 14px 14px 14px; }
+.chat-msg.user .chat-bubble { background: var(--navy); color: white; border-radius: 14px 4px 14px 14px; }
+.chat-avatar { width: 32px; height: 32px; border-radius: 50%; flex-shrink: 0; }
+.chat-ai-avatar { background: var(--gold-pale); display: flex; align-items: center; justify-content: center; font-size: 1rem; }
+.chat-input-area {
+  padding: 16px; border-top: 1px solid var(--border); background: white;
+  display: flex; gap: 10px;
+}
+.typing-indicator { display: flex; gap: 4px; align-items: center; padding: 12px 16px; }
+.typing-dot {
+  width: 8px; height: 8px; border-radius: 50%; background: var(--text-muted);
+  animation: typing 1.2s infinite;
+}
+.typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-dot:nth-child(3) { animation-delay: 0.4s; }
+@keyframes typing { 0%,60%,100% { transform: translateY(0); } 30% { transform: translateY(-6px); } }
+
+/* ===================================
+   13. CANDIDATURES (KANBAN)
+=================================== */
+.kanban-board { display: flex; gap: 16px; overflow-x: auto; padding-bottom: 20px; }
+.kanban-col {
+  min-width: 240px; flex: 1;
+  background: var(--bg); border-radius: var(--radius); padding: 16px;
+  border: 1px solid var(--border);
+}
+.kanban-col-header {
+  display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;
+}
+.kanban-col-title { font-size: 0.82rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
+.kanban-count {
+  min-width: 22px; height: 22px; background: var(--border); border-radius: 99px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.75rem; font-weight: 700; color: var(--text-muted);
+}
+.kcard {
+  background: white; border-radius: var(--radius-sm); padding: 16px;
+  border: 1px solid var(--border); margin-bottom: 10px; cursor: pointer;
+  transition: all 0.2s; box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+.kcard:hover { box-shadow: var(--shadow); border-color: var(--gold); transform: translateY(-1px); }
+.kcard-company { font-size: 0.72rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 4px; }
+.kcard-title { font-size: 0.9rem; font-weight: 600; color: var(--text); margin-bottom: 10px; }
+.kcard-meta { font-size: 0.75rem; color: var(--text-muted); display: flex; align-items: center; gap: 6px; }
+.kcard-date { font-size: 0.72rem; color: var(--text-muted); }
+.match-score {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 0.72rem; font-weight: 700; color: var(--success);
+}
+
+/* ===================================
+   14. DETAIL CANDIDATURE
+=================================== */
+.cand-detail-header {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  padding: 28px; border-bottom: 1px solid var(--border);
+}
+.document-preview {
+  background: var(--bg); border-radius: var(--radius-sm);
+  padding: 24px; font-size: 0.85rem; line-height: 1.8; color: var(--text);
+  border: 1px solid var(--border); max-height: 400px; overflow-y: auto;
+}
+.cv-section-title { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--navy); border-bottom: 2px solid var(--gold); padding-bottom: 4px; margin: 16px 0 10px; }
+
+/* ===================================
+   15. ENTRETIEN
+=================================== */
+.question-card {
+  background: white; border-radius: var(--radius-sm); padding: 20px;
+  border: 1px solid var(--border); margin-bottom: 14px;
+}
+.question-type { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); margin-bottom: 6px; }
+.question-text { font-weight: 600; color: var(--text); margin-bottom: 10px; font-size: 0.92rem; }
+.answer-text { font-size: 0.85rem; color: var(--text-muted); line-height: 1.7; }
+.star-method { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+.star-item { background: var(--bg); border-radius: 8px; padding: 12px; }
+.star-label { font-size: 0.72rem; font-weight: 700; color: var(--gold); text-transform: uppercase; margin-bottom: 4px; }
+.star-content { font-size: 0.82rem; color: var(--text); }
+
+/* ===================================
+   16. GRILLE SALARIALE
+=================================== */
+.salary-result {
+  background: linear-gradient(135deg, var(--navy), var(--navy-light));
+  border-radius: var(--radius); padding: 32px; color: white; text-align: center;
+  margin-bottom: 24px;
+}
+.salary-range { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--gold); margin: 8px 0; }
+.salary-bar-wrap { margin: 16px 0; }
+.salary-bar-track { height: 10px; background: rgba(255,255,255,0.2); border-radius: 99px; position: relative; margin: 4px 0; }
+.salary-bar-fill { height: 100%; background: var(--gold); border-radius: 99px; }
+.salary-bar-marker {
+  position: absolute; top: -4px; width: 18px; height: 18px; border-radius: 50%;
+  background: white; border: 3px solid var(--gold); transform: translateX(-50%);
+}
+.nego-card { background: var(--gold-pale); border: 1px solid rgba(212,168,67,0.3); border-radius: var(--radius-sm); padding: 20px; }
+
+/* ===================================
+   17. COACHING
+=================================== */
+.coaching-week {
+  border-left: 3px solid var(--border); padding-left: 20px; margin-bottom: 24px; position: relative;
+}
+.coaching-week.current { border-left-color: var(--gold); }
+.coaching-dot {
+  width: 12px; height: 12px; border-radius: 50%; background: var(--border);
+  position: absolute; left: -7.5px; top: 4px;
+}
+.coaching-week.current .coaching-dot { background: var(--gold); }
+.coaching-week-label { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); margin-bottom: 6px; }
+.coaching-msg-card {
+  background: white; border-radius: var(--radius-sm); padding: 20px;
+  border: 1px solid var(--border);
+}
+.coaching-msg-type { font-size: 0.72rem; font-weight: 700; color: var(--gold); margin-bottom: 6px; }
+.coaching-msg-text { font-size: 0.88rem; line-height: 1.7; color: var(--text); }
+.coaching-tip {
+  display: flex; align-items: flex-start; gap: 10px; padding: 12px;
+  background: var(--info-bg); border-radius: 8px; margin-top: 10px;
+  font-size: 0.82rem; color: var(--navy);
+}
+
+/* ===================================
+   18. ABONNEMENT
+=================================== */
+.plan-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 28px; }
+.plan-card {
+  background: white; border-radius: var(--radius); padding: 28px;
+  border: 2px solid var(--border); transition: all 0.3s; text-align: center;
+}
+.plan-card:hover { border-color: var(--gold); transform: translateY(-2px); }
+.plan-card.active { border-color: var(--navy); background: var(--info-bg); }
+.plan-name { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--navy); margin-bottom: 8px; }
+.plan-price { font-size: 1.8rem; font-weight: 700; color: var(--navy); }
+.plan-price span { font-size: 0.85rem; color: var(--text-muted); font-weight: 400; }
+.plan-save { font-size: 0.75rem; color: var(--success); font-weight: 700; margin-bottom: 20px; }
+
+/* ===================================
+   19. ANIMATIONS
+=================================== */
+.fade-in { animation: fadeIn 0.4s ease forwards; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.pulse { animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.6; } }
+
+/* ===================================
+   20. LOADING
+=================================== */
+.loading-dots { display: flex; gap: 5px; align-items: center; }
+.loading-dot { width: 6px; height: 6px; background: var(--gold); border-radius: 50%; animation: typing 1s infinite; }
+.skeleton {
+  background: linear-gradient(90deg, var(--border) 25%, #F3F2EF 50%, var(--border) 75%);
+  background-size: 200% 100%; animation: shimmer 1.5s infinite;
+  border-radius: 6px;
+}
+@keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+/* ===================================
+   21. RESPONSIVE TWEAKS
+=================================== */
+@media (max-width: 900px) {
+  .hero-visual { display: none; }
+  .features-grid { grid-template-columns: 1fr 1fr; }
+  .pricing-grid { grid-template-columns: 1fr; }
+  .stats-grid { grid-template-columns: 1fr 1fr; }
+  .dashboard-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ================================================================
+     LANDING PAGE
+================================================================ -->
+<div id="view-landing">
+  <nav class="landing-nav">
+    <div class="logo"><div class="logo-dot"></div> Career OS</div>
+    <div style="display:flex;gap:12px;align-items:center">
+      <button class="btn btn-ghost btn-sm" onclick="showAuth('login')">Connexion</button>
+      <button class="btn btn-gold btn-sm" onclick="showAuth('register')">Commencer gratuitement</button>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <div class="landing-hero" style="display:flex;align-items:center;gap:0;padding-top:100px">
+    <div class="hero-content" style="max-width:580px;padding-right:40px">
+      <div class="hero-tag">🌍 Conçu pour le marché ivoirien</div>
+      <h1 class="hero-title">
+        Décrochez l'emploi qui vous<br><em>ressemble vraiment</em>
+      </h1>
+      <p class="hero-subtitle">
+        Career OS est le premier système d'accompagnement carrière conçu pour le candidat — pas pour les entreprises. Connaissance de soi, CV sur mesure, préparation entretien, coaching IA. Tout en un.
+      </p>
+      <div class="hero-cta">
+        <button class="btn btn-primary btn-lg" onclick="showAuth('register')">Démarrer mon analyse →</button>
+        <button class="btn btn-ghost btn-lg" onclick="demoLogin()">⚡ Voir la démo</button>
+      </div>
+      <div class="hero-proof">
+        <div class="proof-avatars">
+          <div class="proof-avatar">AK</div>
+          <div class="proof-avatar">MO</div>
+          <div class="proof-avatar">FK</div>
+          <div class="proof-avatar">BI</div>
+        </div>
+        <div>
+          <div style="font-size:0.82rem;font-weight:600;color:var(--text)">+140 candidats accompagnés</div>
+          <div style="font-size:0.75rem;color:var(--text-muted)">⭐⭐⭐⭐⭐ 4.9/5 satisfaction</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual" style="flex:1;display:flex;justify-content:center">
+      <div class="hero-card-stack">
+        <div class="hcard hcard-1">
+          <div style="font-size:0.72rem;font-weight:700;color:var(--text-muted);margin-bottom:8px">PROFIL DE PERSONNALITÉ</div>
+          <div style="font-family:'Playfair Display',serif;font-size:0.95rem;color:var(--navy);margin-bottom:10px">Amara Koné</div>
+          <div class="big5-bars">
+            <div class="big5-row"><div class="big5-name" style="font-size:0.7rem">Conscience</div><div class="big5-bar"><div class="big5-fill" style="width:82%;background:var(--navy)"></div></div><div class="big5-score" style="font-size:0.7rem">82</div></div>
+            <div class="big5-row"><div class="big5-name" style="font-size:0.7rem">Ouverture</div><div class="big5-bar"><div class="big5-fill" style="width:78%;background:var(--gold)"></div></div><div class="big5-score" style="font-size:0.7rem">78</div></div>
+            <div class="big5-row"><div class="big5-name" style="font-size:0.7rem">Agréabilité</div><div class="big5-bar"><div class="big5-fill" style="width:88%;background:var(--success)"></div></div><div class="big5-score" style="font-size:0.7rem">88</div></div>
+          </div>
+        </div>
+        <div class="hcard hcard-2">
+          <div style="font-size:0.7rem;font-weight:700;color:var(--success);margin-bottom:6px">✓ CV OPTIMISÉ ATS</div>
+          <div style="font-size:0.82rem;font-weight:600;color:var(--text)">Score de correspondance</div>
+          <div style="font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;color:var(--navy)">94<span style="font-size:1rem;color:var(--text-muted)">/100</span></div>
+          <div style="font-size:0.72rem;color:var(--text-muted)">Orange CI — Office Manager</div>
+        </div>
+        <div class="hcard hcard-3">
+          <div style="font-size:0.7rem;font-weight:700;color:var(--gold);margin-bottom:6px">💡 COACHING HEBDO</div>
+          <div style="font-size:0.82rem;color:var(--text);line-height:1.5">"Votre profil Chemin de Vie 7 vous prédispose à l'analyse. Valorisez cela en entretien."</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Features -->
+  <div class="features-section">
+    <div class="section-header">
+      <div class="section-label">Ce que vous obtenez</div>
+      <h2 class="section-title">Tout ce dont vous avez besoin pour décrocher un emploi</h2>
+      <p class="section-sub">Career OS couvre chaque étape de votre parcours, de la connaissance de soi à la négociation salariale.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🔮</div>
+        <div class="feature-title">Analyse de personnalité profonde</div>
+        <div class="feature-desc">Numérologie + Big Five + analyse des soft skills. Vous recevez un portrait professionnel complet qui vous aide à vous positionner avec cohérence.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎯</div>
+        <div class="feature-title">Bilan de compétences validé par l'IA</div>
+        <div class="feature-desc">L'IA ne vous croit pas sur parole. Elle évalue vos compétences via un dialogue rigoureux et vous attribue un niveau certifié par la plateforme.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📄</div>
+        <div class="feature-title">CV et lettres sur mesure</div>
+        <div class="feature-desc">Pour chaque offre, le système génère un CV optimisé ATS et une lettre de motivation qui sonne vraiment comme vous — pas comme un modèle générique.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎤</div>
+        <div class="feature-title">Préparation à l'entretien</div>
+        <div class="feature-desc">Kit de questions probables, réponses personnalisées selon votre profil, et simulateur d'entretien avec feedback en temps réel.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💰</div>
+        <div class="feature-title">Grille salariale & négociation</div>
+        <div class="feature-desc">Données du marché ivoirien par poste et secteur. Sachez ce que vous valez avant de postuler, et comment négocier avec les bons arguments.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">✨</div>
+        <div class="feature-title">Coaching hebdomadaire personnalisé</div>
+        <div class="feature-desc">Chaque semaine, un message de coaching généré sur la base de votre profil réel et l'état de votre recherche d'emploi.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pricing -->
+  <div class="pricing-section">
+    <div class="section-header">
+      <div class="section-label">Tarifs</div>
+      <h2 class="section-title">Un investissement dans votre carrière</h2>
+      <p class="section-sub" style="color:rgba(255,255,255,0.6)">Paiement sécurisé via Djamo Business. Accès immédiat à l'activation.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="price-card">
+        <div class="price-plan">Mensuel</div>
+        <div class="price-amount">9 900 <span class="price-period">FCFA / mois</span></div>
+        <div class="price-features">
+          <div class="price-feat">Analyse de personnalité complète</div>
+          <div class="price-feat">Bilan de compétences</div>
+          <div class="price-feat">5 CV + lettres personnalisés</div>
+          <div class="price-feat">Coaching hebdomadaire</div>
+        </div>
+        <button class="btn btn-outline btn-full" style="border-color:rgba(255,255,255,0.3);color:white" onclick="showAuth('register')">Commencer</button>
+      </div>
+      <div class="price-card featured">
+        <div class="price-featured-badge">⭐ Le plus populaire</div>
+        <div class="price-plan" style="color:var(--text-muted)">Trimestriel</div>
+        <div class="price-amount" style="color:var(--navy)">25 000 <span class="price-period">FCFA / 3 mois</span></div>
+        <div style="font-size:0.8rem;color:var(--success);font-weight:700;margin:4px 0">Économisez 4 700 FCFA</div>
+        <div class="price-features">
+          <div class="price-feat">Tout ce qui est dans Mensuel</div>
+          <div class="price-feat">CV illimités</div>
+          <div class="price-feat">Simulateur d'entretien</div>
+          <div class="price-feat">Grille salariale</div>
+        </div>
+        <button class="btn btn-primary btn-full" onclick="showAuth('register')">Choisir ce plan →</button>
+      </div>
+      <div class="price-card">
+        <div class="price-plan">Annuel</div>
+        <div class="price-amount">85 000 <span class="price-period">FCFA / an</span></div>
+        <div style="font-size:0.8rem;color:var(--gold);font-weight:700;margin:4px 0">Économisez 33 800 FCFA</div>
+        <div class="price-features">
+          <div class="price-feat">Tout ce qui est dans Trimestriel</div>
+          <div class="price-feat">Portfolio partageable</div>
+          <div class="price-feat">Accès prioritaire aux nouvelles fonctionnalités</div>
+        </div>
+        <button class="btn btn-outline btn-full" style="border-color:rgba(255,255,255,0.3);color:white" onclick="showAuth('register')">Commencer</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div style="background:var(--navy-dark);padding:32px 48px;display:flex;align-items:center;justify-content:space-between">
+    <div class="sidebar-logo">
+      <div class="logo-dot"></div>Career OS
+    </div>
+    <div style="font-size:0.8rem;color:rgba(255,255,255,0.35)">© 2026 Career OS — Abidjan, Côte d'Ivoire</div>
+    <div style="font-size:0.8rem;color:rgba(255,255,255,0.35)">Propulsé par IA · Paiement via Djamo</div>
+  </div>
+</div>
+
+<!-- ================================================================
+     AUTH PAGE
+================================================================ -->
+<div id="view-auth" class="hidden">
+  <div style="position:fixed;top:16px;left:24px">
+    <button class="btn btn-ghost btn-sm" onclick="showLanding()">← Retour</button>
+  </div>
+  <div class="auth-card">
+    <div class="auth-logo">
+      <div class="logo" style="justify-content:center;margin-bottom:4px"><div class="logo-dot"></div> Career OS</div>
+      <div style="font-size:0.82rem;color:var(--text-muted)">Votre système d'exploitation de carrière</div>
+    </div>
+    <div class="auth-tabs" id="auth-tabs">
+      <div class="auth-tab active" id="tab-login" onclick="switchTab('login')">Connexion</div>
+      <div class="auth-tab" id="tab-register" onclick="switchTab('register')">Créer un compte</div>
+    </div>
+    <!-- Login form -->
+    <div id="form-login">
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-input" placeholder="votre@email.com" value="amara.kone@gmail.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Mot de passe</label>
+          <input type="password" class="form-input" placeholder="••••••••" value="••••••••">
+        </div>
+        <button class="btn btn-primary btn-full" onclick="demoLogin()">Se connecter</button>
+        <div style="text-align:center;font-size:0.8rem;color:var(--text-muted)">
+          <a href="#" style="color:var(--navy)">Mot de passe oublié ?</a>
+        </div>
+        <div style="border-top:1px solid var(--border);padding-top:16px;text-align:center">
+          <button class="btn btn-gold btn-full" onclick="demoLogin()">⚡ Accès démo instantané</button>
+          <div style="font-size:0.72rem;color:var(--text-muted);margin-top:8px">Testez toutes les fonctionnalités sans inscription</div>
+        </div>
+      </div>
+    </div>
+    <!-- Register form -->
+    <div id="form-register" class="hidden">
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Prénom</label>
+            <input type="text" class="form-input" placeholder="Amara">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Nom</label>
+            <input type="text" class="form-input" placeholder="Koné">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input type="email" class="form-input" placeholder="votre@email.com">
+        </div>
+        <div class="form-group">
+          <label class="form-label">WhatsApp</label>
+          <input type="tel" class="form-input" placeholder="+225 07 xx xx xx xx">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Date de naissance</label>
+          <input type="date" class="form-input">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Mot de passe</label>
+          <input type="password" class="form-input" placeholder="Minimum 8 caractères">
+        </div>
+        <button class="btn btn-gold btn-full" onclick="demoLogin()">Créer mon compte →</button>
+        <div style="font-size:0.72rem;color:var(--text-muted);text-align:center">Paiement requis pour activer l'accès complet</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================================
+     APP SHELL
+================================================================ -->
+<div id="view-app" class="hidden">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-logo"><div class="logo-dot"></div> Career OS</div>
+      <div class="sidebar-user">
+        <div class="avatar">AK</div>
+        <div>
+          <div class="sidebar-user-name">Amara Koné</div>
+          <div class="sidebar-user-sub">Plan Trimestriel · Actif</div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Principal</div>
+      <button class="nav-item active" id="nav-dashboard" onclick="navigateTo('dashboard')">
+        <span class="nav-icon">🏠</span> Tableau de bord
+      </button>
+
+      <div class="nav-section-label">Mon profil</div>
+      <button class="nav-item" id="nav-onboarding" onclick="navigateTo('onboarding')">
+        <span class="nav-icon">🔮</span> Analyse de personnalité
+      </button>
+      <button class="nav-item" id="nav-bilan" onclick="navigateTo('bilan')">
+        <span class="nav-icon">🎯</span> Bilan de compétences
+      </button>
+
+      <div class="nav-section-label">Candidatures</div>
+      <button class="nav-item" id="nav-candidatures" onclick="navigateTo('candidatures')">
+        <span class="nav-icon">📋</span> Mes candidatures
+      </button>
+      <button class="nav-item" id="nav-entretien" onclick="navigateTo('entretien')">
+        <span class="nav-icon">🎤</span> Préparation entretien
+      </button>
+      <button class="nav-item" id="nav-salaire" onclick="navigateTo('salaire')">
+        <span class="nav-icon">💰</span> Grille salariale
+      </button>
+
+      <div class="nav-section-label">Suivi</div>
+      <button class="nav-item" id="nav-coaching" onclick="navigateTo('coaching')">
+        <span class="nav-icon">✨</span> Coaching hebdo
+        <span class="badge badge-gold" style="margin-left:auto;font-size:0.68rem;padding:2px 7px">3</span>
+      </button>
+      <button class="nav-item" id="nav-abonnement" onclick="navigateTo('abonnement')">
+        <span class="nav-icon">💎</span> Mon abonnement
+      </button>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <div class="sub-status">
+        <div class="sub-status-label">Abonnement valide jusqu'au</div>
+        <div class="sub-status-val">22 juin 2026</div>
+      </div>
+      <button class="nav-item" style="margin-top:8px" onclick="showLanding()">
+        <span class="nav-icon">🚪</span> Déconnexion
+      </button>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <div class="main-content">
+    <header class="topbar">
+      <div class="topbar-title" id="topbar-title">Tableau de bord</div>
+      <div style="display:flex;align-items:center;gap:16px">
+        <div style="font-size:0.82rem;color:var(--text-muted)">Dimanche 22 mars 2026</div>
+        <div class="avatar">AK</div>
+      </div>
+    </header>
+
+    <!-- DASHBOARD -->
+    <div id="page-dashboard" class="page-content fade-in">
+      <div class="page-header">
+        <h1 class="page-title">Bonjour, Amara 👋</h1>
+        <p class="page-sub">Voici un aperçu de votre recherche d'emploi cette semaine.</p>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number">12</div>
+          <div class="stat-label">Candidatures envoyées</div>
+        </div>
+        <div class="stat-card" style="--gold:var(--success)">
+          <div class="stat-number" style="color:var(--success)">3</div>
+          <div class="stat-label">Entretiens obtenus</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number" style="color:var(--gold)">94%</div>
+          <div class="stat-label">Score ATS moyen</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">1</div>
+          <div class="stat-label">Offre reçue 🎉</div>
+        </div>
+      </div>
+      <div class="dashboard-grid">
+        <div class="card">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
+            <h3 style="font-size:1.05rem;color:var(--navy)">Activité récente</h3>
+            <button class="btn btn-ghost btn-sm" onclick="navigateTo('candidatures')">Voir tout →</button>
+          </div>
+          <div class="activity-item">
+            <div class="activity-dot" style="background:var(--success)"></div>
+            <div>
+              <div style="font-size:0.87rem;font-weight:600">Offre reçue — TotalEnergies CI</div>
+              <div style="font-size:0.77rem;color:var(--text-muted)">Executive Assistant · Aujourd'hui</div>
+            </div>
+            <span class="badge badge-green" style="margin-left:auto">Offre reçue</span>
+          </div>
+          <div class="activity-item">
+            <div class="activity-dot" style="background:var(--gold)"></div>
+            <div>
+              <div style="font-size:0.87rem;font-weight:600">Entretien planifié — Orange CI</div>
+              <div style="font-size:0.77rem;color:var(--text-muted)">Office Manager · 28 mars 2026</div>
+            </div>
+            <span class="badge badge-gold" style="margin-left:auto">28 mars</span>
+          </div>
+          <div class="activity-item">
+            <div class="activity-dot"></div>
+            <div>
+              <div style="font-size:0.87rem;font-weight:600">CV envoyé — Ecobank CI</div>
+              <div style="font-size:0.77rem;color:var(--text-muted)">Assistante de Direction · 15 mars</div>
+            </div>
+            <span class="badge badge-blue" style="margin-left:auto">En attente</span>
+          </div>
+          <div class="activity-item">
+            <div class="activity-dot"></div>
+            <div>
+              <div style="font-size:0.87rem;font-weight:600">Candidature envoyée — Nestlé CI</div>
+              <div style="font-size:0.77rem;color:var(--text-muted)">Coordinatrice Administrative · 10 mars</div>
+            </div>
+            <span class="badge badge-blue" style="margin-left:auto">En attente</span>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:20px">
+          <div class="card card-sm">
+            <div style="font-size:0.85rem;font-weight:700;color:var(--navy);margin-bottom:12px">✨ Coaching de la semaine</div>
+            <div style="font-size:0.85rem;color:var(--text);line-height:1.7;margin-bottom:12px">"Votre entretien chez Orange CI approche. Votre Chemin de Vie 7 vous donne une profondeur d'analyse rare — appuyez-vous dessus pour montrer votre vision stratégique."</div>
+            <button class="btn btn-outline btn-sm" onclick="navigateTo('coaching')">Lire le coaching complet</button>
+          </div>
+          <div class="card card-sm">
+            <div style="font-size:0.85rem;font-weight:700;color:var(--navy);margin-bottom:12px">Actions rapides</div>
+            <div class="quick-actions">
+              <button class="quick-action" onclick="navigateTo('candidature-new')">
+                <span class="quick-action-icon">➕</span>
+                <div>
+                  <div style="font-size:0.82rem;font-weight:600">Nouvelle candidature</div>
+                  <div style="font-size:0.72rem;color:var(--text-muted)">CV + lettre générés en 30s</div>
+                </div>
+              </button>
+              <button class="quick-action" onclick="navigateTo('entretien')">
+                <span class="quick-action-icon">🎤</span>
+                <div>
+                  <div style="font-size:0.82rem;font-weight:600">Préparer mon entretien</div>
+                  <div style="font-size:0.72rem;color:var(--text-muted)">Orange CI — 28 mars</div>
+                </div>
+              </button>
+              <button class="quick-action" onclick="navigateTo('salaire')">
+                <span class="quick-action-icon">💰</span>
+                <div>
+                  <div style="font-size:0.82rem;font-weight:600">Vérifier ma grille salariale</div>
+                  <div style="font-size:0.72rem;color:var(--text-muted)">Avant de négocier</div>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ONBOARDING / ANALYSE DE PERSONNALITÉ -->
+    <div id="page-onboarding" class="page-content fade-in hidden">
+      <div class="page-header">
+        <h1 class="page-title">Analyse de personnalité</h1>
+        <p class="page-sub">Complétez les 4 étapes pour générer votre portrait professionnel complet.</p>
+      </div>
+      <!-- Progress steps -->
+      <div style="display:flex;align-items:center;gap:0;margin-bottom:40px;max-width:600px">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:6px">
+          <div class="step-dot done" id="sdot1">✓</div>
+          <div style="font-size:0.7rem;font-weight:600;color:var(--text-muted);white-space:nowrap">Informations</div>
+        </div>
+        <div class="step-line done"></div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:6px">
+          <div class="step-dot done" id="sdot2">✓</div>
+          <div style="font-size:0.7rem;font-weight:600;color:var(--text-muted);white-space:nowrap">Big Five</div>
+        </div>
+        <div class="step-line done"></div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:6px">
+          <div class="step-dot active" id="sdot3">3</div>
+          <div style="font-size:0.7rem;font-weight:600;color:var(--navy);white-space:nowrap">Soft Skills</div>
+        </div>
+        <div class="step-line"></div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:6px">
+          <div class="step-dot" id="sdot4">4</div>
+          <div style="font-size:0.7rem;font-weight:600;color:var(--text-muted);white-space:nowrap">Résultats</div>
+        </div>
+      </div>
+
+      <!-- Step 1: Infos + Numérologie -->
+      <div id="ob-step-1" class="hidden">
+        <div class="onboarding-card" style="max-width:640px">
+          <h2 class="onboarding-title">Vos informations personnelles</h2>
+          <p class="onboarding-sub">Ces données servent à calculer votre profil numérologique professionnel.</p>
+          <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:28px">
+            <div class="form-row">
+              <div class="form-group"><label class="form-label">Prénom(s)</label><input type="text" class="form-input" value="Amara" id="inp-prenom"></div>
+              <div class="form-group"><label class="form-label">Nom de famille</label><input type="text" class="form-input" value="Koné" id="inp-nom"></div>
+            </div>
+            <div class="form-group"><label class="form-label">Date de naissance</label><input type="date" class="form-input" value="1999-05-14" id="inp-dob"></div>
+            <div class="form-group"><label class="form-label">Ville</label><input type="text" class="form-input" value="Abidjan" placeholder="Abidjan"></div>
+            <div class="form-group"><label class="form-label">Domaine professionnel</label>
+              <select class="form-input form-select">
+                <option>Administration & Gestion</option>
+                <option>Finance & Comptabilité</option>
+                <option>Commercial & Marketing</option>
+                <option>Ressources Humaines</option>
+                <option>Informatique</option>
+                <option>Autre</option>
+              </select>
+            </div>
+          </div>
+          <!-- Numérologie résultats instantanés -->
+          <div style="background:var(--gold-pale);border-radius:var(--radius-sm);padding:20px;border:1px solid rgba(212,168,67,0.3);margin-bottom:24px" id="numero-result">
+            <div style="font-size:0.8rem;font-weight:700;color:var(--warning);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:12px">✦ Calcul numérologique</div>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px">
+              <div style="text-align:center"><div style="font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;color:var(--navy)">7</div><div style="font-size:0.72rem;color:var(--text-muted)">Chemin de Vie</div></div>
+              <div style="text-align:center"><div style="font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;color:var(--navy)">5</div><div style="font-size:0.72rem;color:var(--text-muted)">Nombre d'Expression</div></div>
+              <div style="text-align:center"><div style="font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;color:var(--navy)">3</div><div style="font-size:0.72rem;color:var(--text-muted)">Nombre de l'Âme</div></div>
+            </div>
+            <div style="font-size:0.82rem;color:var(--text);margin-top:12px;line-height:1.6">
+              <strong>Chemin de Vie 7 :</strong> Analyste-né, vous êtes fait pour les environnements qui valorisent la précision, la réflexion et l'expertise. Vous excellez dans les rôles qui demandent rigueur et profondeur.
+            </div>
+          </div>
+          <button class="btn btn-primary btn-full" onclick="goToStep(2)">Continuer vers le questionnaire →</button>
+        </div>
+      </div>
+
+      <!-- Step 2: Big Five -->
+      <div id="ob-step-2" class="hidden">
+        <div class="onboarding-card" style="max-width:680px">
+          <h2 class="onboarding-title">Questionnaire de personnalité</h2>
+          <p class="onboarding-sub">Évaluez chaque affirmation de 1 (pas du tout) à 5 (tout à fait). Répondez spontanément.</p>
+          <div style="font-size:0.8rem;color:var(--text-muted);background:var(--bg);padding:10px 14px;border-radius:8px;margin-bottom:24px">
+            Dimension : <strong id="bf-dimension-name">Ouverture d'esprit</strong> — Question <span id="bf-q-num">1</span> sur 25
+          </div>
+          <div id="bf-question-area">
+            <!-- Questions Big Five injectées par JS -->
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:24px">
+            <button class="btn btn-ghost" onclick="goToStep(1)">← Retour</button>
+            <button class="btn btn-primary" onclick="completeBigFive()">Voir les résultats →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3: Soft Skills -->
+      <div id="ob-step-3">
+        <div class="onboarding-card" style="max-width:680px">
+          <h2 class="onboarding-title">Analyse de vos soft skills</h2>
+          <p class="onboarding-sub">Choisissez la réponse qui décrit le mieux votre réaction naturelle.</p>
+          <div id="sq-question-area">
+            <div style="font-size:0.82rem;font-weight:600;color:var(--text-muted);margin-bottom:16px">Question 1 sur 5</div>
+            <div style="font-size:1rem;font-weight:600;color:var(--text);margin-bottom:20px;line-height:1.5">
+              Votre manager vous confie un projet sans vous donner d'instructions claires. Vous...
+            </div>
+            <div class="sq-option selected" onclick="selectSQ(this)">
+              <div class="sq-radio"></div>
+              <div style="font-size:0.88rem">Posez des questions précises pour clarifier les attentes avant de commencer</div>
+            </div>
+            <div class="sq-option" onclick="selectSQ(this)">
+              <div class="sq-radio"></div>
+              <div style="font-size:0.88rem">Démarrez directement et ajustez en cours de route</div>
+            </div>
+            <div class="sq-option" onclick="selectSQ(this)">
+              <div class="sq-radio"></div>
+              <div style="font-size:0.88rem">Proposez un plan structuré à votre manager pour validation</div>
+            </div>
+            <div class="sq-option" onclick="selectSQ(this)">
+              <div class="sq-radio"></div>
+              <div style="font-size:0.88rem">Consultez des collègues pour avoir leur perspective d'abord</div>
+            </div>
+          </div>
+          <div style="display:flex;justify-content:space-between;margin-top:28px">
+            <button class="btn btn-ghost" onclick="goToStep(2)">← Retour</button>
+            <button class="btn btn-primary" onclick="generatePortrait()">Générer mon portrait →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 4: Results -->
+      <div id="ob-step-4" class="hidden">
+        <div id="portrait-loading" style="text-align:center;padding:60px 0">
+          <div style="font-size:2.5rem;margin-bottom:16px">🔮</div>
+          <h3 style="font-family:'Playfair Display',serif;color:var(--navy);font-size:1.3rem;margin-bottom:8px">Génération de votre portrait en cours...</h3>
+          <p style="color:var(--text-muted);margin-bottom:24px">L'IA analyse votre numérologie, vos scores Big Five et vos réponses situationnelles.</p>
+          <div class="loading-dots" style="justify-content:center">
+            <div class="loading-dot"></div>
+            <div class="loading-dot" style="animation-delay:0.15s"></div>
+            <div class="loading-dot" style="animation-delay:0.3s"></div>
+          </div>
+        </div>
+        <div id="portrait-result" class="hidden" style="max-width:760px">
+          <div class="card" style="margin-bottom:24px;border-top:4px solid var(--gold)">
+            <div style="display:flex;align-items:center;gap:16px;margin-bottom:24px">
+              <div style="width:60px;height:60px;background:linear-gradient(135deg,var(--navy),var(--navy-light));border-radius:50%;display:flex;align-items:center;justify-content:center;color:white;font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700">AK</div>
+              <div>
+                <h2 style="font-size:1.3rem;color:var(--navy)">Amara Koné</h2>
+                <div style="font-size:0.82rem;color:var(--text-muted)">Portrait de personnalité professionnelle · Chemin de Vie 7</div>
+              </div>
+              <div style="margin-left:auto">
+                <span class="badge badge-gold">Profil complété ✓</span>
+              </div>
+            </div>
+            <div class="report-block">
+              <div class="report-block-title">💎 Vos forces naturelles</div>
+              <div class="report-block-text">Vous possédez une capacité d'analyse et de synthèse hors norme, renforcée par votre Chemin de Vie 7 et votre score élevé en Conscience (82/100). Vous êtes la personne sur qui l'on peut compter pour traiter l'information avec précision et livrer un travail soigné. Votre Agréabilité exceptionnelle (88/100) fait de vous un pilier de cohésion dans toute équipe.</div>
+            </div>
+            <div class="report-block" style="background:var(--info-bg);border-color:var(--navy)">
+              <div class="report-block-title">🎯 Comment vous êtes perçu(e)</div>
+              <div class="report-block-text">En premier contact, les recruteurs vous perçoivent comme calme, fiable et réfléchi(e). Vous inspirez confiance naturellement. Votre Extraversion modérée (45/100) signifie que vous brillez davantage dans les interactions en tête-à-tête qu'en grand groupe — ce n'est pas une faiblesse, c'est un style qui convient parfaitement aux rôles d'assistanat de direction et de coordination.</div>
+            </div>
+            <div class="report-block" style="background:var(--success-bg);border-color:var(--success)">
+              <div class="report-block-title">🌱 Environnements où vous prospérez</div>
+              <div class="report-block-text">Structures bien organisées avec des procédures claires. Rôles polyvalents qui valorisent la rigueur et l'autonomie. Managers qui font confiance et délèguent. Vous vous épanouissez mal dans les environnements chaotiques ou hyper-politiques.</div>
+            </div>
+            <div class="report-block" style="background:var(--danger-bg);border-color:var(--danger)">
+              <div class="report-block-title">⚡ Votre positionnement dans la recherche</div>
+              <div class="report-block-text">Lors de vos entretiens, mettez en avant votre fiabilité, votre sens du détail et votre capacité à gérer plusieurs priorités simultanément sans perdre en qualité. Ces qualités sont exactement ce que cherchent les DGs et managers qui recrutent une assistante de direction.</div>
+            </div>
+          </div>
+          <!-- Scores Big Five visuels -->
+          <div class="card">
+            <h3 style="font-size:1rem;color:var(--navy);margin-bottom:20px">Vos scores Big Five</h3>
+            <div class="big5-bars">
+              <div class="big5-row">
+                <div class="big5-name">Ouverture</div>
+                <div class="big5-bar"><div class="big5-fill" style="width:78%;background:var(--navy)"></div></div>
+                <div class="big5-score">78</div>
+              </div>
+              <div class="big5-row">
+                <div class="big5-name">Conscience</div>
+                <div class="big5-bar"><div class="big5-fill" style="width:82%;background:var(--gold)"></div></div>
+                <div class="big5-score">82</div>
+              </div>
+              <div class="big5-row">
+                <div class="big5-name">Extraversion</div>
+                <div class="big5-bar"><div class="big5-fill" style="width:45%;background:var(--text-muted)"></div></div>
+                <div class="big5-score">45</div>
+              </div>
+              <div class="big5-row">
+                <div class="big5-name">Agréabilité</div>
+                <div class="big5-bar"><div class="big5-fill" style="width:88%;background:var(--success)"></div></div>
+                <div class="big5-score">88</div>
+              </div>
+              <div class="big5-row">
+                <div class="big5-name">Stabilité émot.</div>
+                <div class="big5-bar"><div class="big5-fill" style="width:65%;background:var(--navy-light)"></div></div>
+                <div class="big5-score">65</div>
+              </div>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:16px">
+              <span class="badge badge-blue">Organisation</span>
+              <span class="badge badge-blue">Rigueur</span>
+              <span class="badge badge-gold">Diplomatie</span>
+              <span class="badge badge-gold">Analyse</span>
+              <span class="badge badge-green">Fiabilité</span>
+              <span class="badge badge-green">Écoute active</span>
+              <span class="badge badge-gray">Communication écrite</span>
+            </div>
+          </div>
+          <div style="margin-top:20px;display:flex;gap:12px">
+            <button class="btn btn-primary btn-lg" onclick="navigateTo('bilan')">Passer au bilan de compétences →</button>
+            <button class="btn btn-ghost" onclick="navigateTo('dashboard')">Retour au tableau de bord</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BILAN DE COMPÉTENCES -->
+    <div id="page-bilan" class="page-content fade-in hidden">
+      <div class="page-header">
+        <h1 class="page-title">Bilan de compétences</h1>
+        <p class="page-sub">L'IA valide vos compétences via un dialogue rigoureux — pas sur simple déclaration.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1.2fr;gap:24px">
+        <div>
+          <div class="card" style="margin-bottom:20px">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+              <h3 style="font-size:1rem;color:var(--navy)">Compétences validées</h3>
+              <span class="badge badge-green">8 compétences</span>
+            </div>
+            <div class="competency-item">
+              <div><div class="comp-name">Gestion administrative</div><div style="font-size:0.72rem;color:var(--text-muted)">3 ans d'expérience validée</div></div>
+              <span class="comp-level level-expert">Expert</span>
+            </div>
+            <div class="competency-item">
+              <div><div class="comp-name">Gestion d'agenda complexe</div><div style="font-size:0.72rem;color:var(--text-muted)">Multiples directions</div></div>
+              <span class="comp-level level-expert">Expert</span>
+            </div>
+            <div class="competency-item">
+              <div><div class="comp-name">Organisation d'événements</div><div style="font-size:0.72rem;color:var(--text-muted)">B2B & corporate</div></div>
+              <span class="comp-level level-confirme">Confirmé</span>
+            </div>
+            <div class="competency-item">
+              <div><div class="comp-name">Odoo ERP</div><div style="font-size:0.72rem;color:var(--text-muted)">Module RH & Achats</div></div>
+              <span class="comp-level level-confirme">Confirmé</span>
+            </div>
+            <div class="competency-item">
+              <div><div class="comp-name">Rédaction professionnelle</div><div style="font-size:0.72rem;color:var(--text-muted)">FR/EN bilingue</div></div>
+              <span class="comp-level level-confirme">Confirmé</span>
+            </div>
+            <div class="competency-item">
+              <div><div class="comp-name">Canva & outils créatifs</div></div>
+              <span class="comp-level level-pratique">Pratique</span>
+            </div>
+            <div class="competency-item">
+              <div><div class="comp-name">Asana (gestion de projet)</div></div>
+              <span class="comp-level level-pratique">Pratique</span>
+            </div>
+            <div class="competency-item">
+              <div><div class="comp-name">Gestion budgétaire</div></div>
+              <span class="comp-level level-pratique">Pratique</span>
+            </div>
+          </div>
+          <div class="card">
+            <div style="font-size:0.85rem;font-weight:700;color:var(--gold);margin-bottom:10px">✦ Compétences cachées détectées</div>
+            <div style="font-size:0.82rem;color:var(--text);line-height:1.7;margin-bottom:12px">
+              L'IA a identifié des compétences que vous n'aviez pas déclarées mais qui ressortent de votre parcours :
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <div style="display:flex;align-items:flex-start;gap:8px;font-size:0.82rem"><span style="color:var(--gold);margin-top:2px">✦</span><span><strong>Coordination multi-parties prenantes</strong> — visible à travers vos 3 ans de coordination avec prestataires externes</span></div>
+              <div style="display:flex;align-items:flex-start;gap:8px;font-size:0.82rem"><span style="color:var(--gold);margin-top:2px">✦</span><span><strong>Intelligence émotionnelle professionnelle</strong> — votre score Big Five (Agréabilité 88) corrèle avec des aptitudes de médiation non déclarées</span></div>
+            </div>
+          </div>
+        </div>
+        <!-- Chat interface -->
+        <div>
+          <div style="font-size:0.85rem;font-weight:600;color:var(--navy);margin-bottom:12px">💬 Dialogue d'évaluation IA</div>
+          <div class="chat-container">
+            <div class="chat-messages" id="bilan-chat">
+              <div class="chat-msg ai">
+                <div class="chat-avatar chat-ai-avatar">🤖</div>
+                <div class="chat-bubble">Bonjour Amara. Je suis votre évaluateur IA pour le bilan de compétences. Vous avez déclaré maîtriser la <strong>gestion administrative et d'agenda complexe</strong>. Pour valider cette compétence au niveau Expert, j'ai quelques questions. Quelle était la structure de la direction pour laquelle vous gérez l'agenda ?</div>
+              </div>
+              <div class="chat-msg user">
+                <div class="chat-bubble">Je gérais l'agenda d'un Directeur Général et de son adjoint simultanément. Environ 40 réunions par semaine entre les deux, avec des priorités qui changeaient constamment.</div>
+              </div>
+              <div class="chat-msg ai">
+                <div class="chat-avatar chat-ai-avatar">🤖</div>
+                <div class="chat-bubble">Très bien. Comment gériez-vous les conflits d'agenda entre les deux directeurs, notamment quand une réunion urgente s'imposait ?</div>
+              </div>
+              <div class="chat-msg user">
+                <div class="chat-bubble">J'avais établi une matrice de priorités avec chacun d'eux en début de prise de poste. Chaque réunion avait un niveau d'urgence et un délai de décalage acceptable. Pour les conflits réels, je négociais directement avec les assistantes des autres parties.</div>
+              </div>
+              <div class="chat-msg ai">
+                <div class="chat-avatar chat-ai-avatar">🤖</div>
+                <div class="chat-bubble">Excellente réponse — la mise en place d'une matrice de priorités proactive est une pratique de niveau Expert. ✅ Compétence <strong>Gestion d'agenda complexe</strong> validée au niveau <strong>Expert</strong>. Passons maintenant à votre expérience en organisation d'événements...</div>
+              </div>
+            </div>
+            <div class="chat-input-area">
+              <input type="text" class="form-input" placeholder="Votre réponse..." id="bilan-input" style="flex:1" onkeydown="if(event.key==='Enter')sendBilanMsg()">
+              <button class="btn btn-primary" onclick="sendBilanMsg()">Envoyer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CANDIDATURES -->
+    <div id="page-candidatures" class="page-content fade-in hidden">
+      <div class="page-header" style="display:flex;align-items:flex-start;justify-content:space-between">
+        <div>
+          <h1 class="page-title">Mes candidatures</h1>
+          <p class="page-sub">12 candidatures · 3 entretiens · 1 offre reçue</p>
+        </div>
+        <button class="btn btn-gold" onclick="navigateTo('candidature-new')">+ Nouvelle candidature</button>
+      </div>
+      <div class="kanban-board">
+        <!-- Envoyée -->
+        <div class="kanban-col">
+          <div class="kanban-col-header">
+            <span class="kanban-col-title">Envoyée</span>
+            <span class="kanban-count">3</span>
+          </div>
+          <div class="kcard" onclick="navigateTo('candidature-detail')">
+            <div class="kcard-company">Ecobank CI</div>
+            <div class="kcard-title">Assistante de Direction</div>
+            <div style="display:flex;align-items:center;justify-content:space-between">
+              <div class="kcard-date">15 mars 2026</div>
+              <div class="match-score">⚡ 91%</div>
+            </div>
+          </div>
+          <div class="kcard" onclick="navigateTo('candidature-detail')">
+            <div class="kcard-company">Moov Africa CI</div>
+            <div class="kcard-title">Office Manager</div>
+            <div style="display:flex;align-items:center;justify-content:space-between">
+              <div class="kcard-date">18 mars 2026</div>
+              <div class="match-score">⚡ 87%</div>
+            </div>
+          </div>
+          <div class="kcard" onclick="navigateTo('candidature-detail')">
+            <div class="kcard-company">CFAO Motors</div>
+            <div class="kcard-title">Coordinatrice Administrative</div>
+            <div style="display:flex;align-items:center;justify-content:space-between">
+              <div class="kcard-date">19 mars 2026</div>
+              <div class="match-score">⚡ 85%</div>
+            </div>
+          </div>
+        </div>
+        <!-- En attente -->
+        <div class="kanban-col">
+          <div class="kanban-col-header">
+            <span class="kanban-col-title">En attente</span>
+            <span class="kanban-count">4</span>
+          </div>
+          <div class="kcard" onclick="navigateTo('candidature-detail')">
+            <div class="kcard-company">Nestlé CI</div>
+            <div class="kcard-title">Coordinatrice Administrative</div>
+            <div style="font-size:0.72rem;color:var(--warning);font-weight:600">⏰ Relancer dans 2 jours</div>
+          </div>
+          <div class="kcard" onclick="navigateTo('candidature-detail')">
+            <div class="kcard-company">MTN CI</div>
+            <div class="kcard-title">Executive Assistant</div>
+            <div class="kcard-date">8 mars 2026</div>
+          </div>
+          <div class="kcard" onclick="navigateTo('candidature-detail')">
+            <div class="kcard-company">Société Générale CI</div>
+            <div class="kcard-title">Assistante DG</div>
+            <div class="kcard-date">5 mars 2026</div>
+          </div>
+          <div class="kcard" onclick="navigateTo('candidature-detail')">
+            <div class="kcard-company">Bolloré Africa</div>
+            <div class="kcard-title">Admin & Contracts Officer</div>
+            <div class="kcard-date">3 mars 2026</div>
+          </div>
+        </div>
+        <!-- Entretien -->
+        <div class="kanban-col" style="border-top:3px solid var(--gold)">
+          <div class="kanban-col-header">
+            <span class="kanban-col-title" style="color:var(--gold)">Entretien ✦</span>
+            <span class="kanban-count" style="background:var(--gold-pale);color:var(--warning)">2</span>
+          </div>
+          <div class="kcard" onclick="navigateTo('entretien')" style="border-color:var(--gold)">
+            <div class="kcard-company">Orange CI</div>
+            <div class="kcard-title">Office Manager</div>
+            <div style="background:var(--gold-pale);border-radius:6px;padding:8px;margin-top:8px">
+              <div style="font-size:0.72rem;font-weight:700;color:var(--warning)">📅 Entretien planifié</div>
+              <div style="font-size:0.8rem;font-weight:600;color:var(--text)">28 mars à 10h00</div>
+              <div style="font-size:0.72rem;color:var(--text-muted)">Tour Eiffel, Plateau</div>
+            </div>
+            <button class="btn btn-ghost btn-sm btn-full" style="margin-top:8px" onclick="event.stopPropagation();navigateTo('entretien')">Préparer l'entretien →</button>
+          </div>
+          <div class="kcard" onclick="navigateTo('candidature-detail')">
+            <div class="kcard-company">Yango CI</div>
+            <div class="kcard-title">Office Manager</div>
+            <div style="font-size:0.72rem;color:var(--text-muted);margin-top:4px">Entretien RH : 25 mars</div>
+          </div>
+        </div>
+        <!-- Offre reçue -->
+        <div class="kanban-col" style="border-top:3px solid var(--success)">
+          <div class="kanban-col-header">
+            <span class="kanban-col-title" style="color:var(--success)">Offre reçue 🎉</span>
+            <span class="kanban-count" style="background:var(--success-bg);color:var(--success)">1</span>
+          </div>
+          <div class="kcard" style="border-color:var(--success)">
+            <div class="kcard-company">TotalEnergies CI</div>
+            <div class="kcard-title">Executive Assistant</div>
+            <div style="background:var(--success-bg);border-radius:6px;padding:8px;margin-top:8px">
+              <div style="font-size:0.72rem;font-weight:700;color:var(--success)">🎉 Offre reçue</div>
+              <div style="font-size:0.85rem;font-weight:700;color:var(--text)">450 000 FCFA/mois</div>
+              <div style="font-size:0.72rem;color:var(--text-muted)">Répondre avant le 25 mars</div>
+            </div>
+            <button class="btn btn-primary btn-sm btn-full" style="margin-top:8px" onclick="navigateTo('salaire')">Négocier le salaire →</button>
+          </div>
+        </div>
+        <!-- Refus -->
+        <div class="kanban-col" style="opacity:0.7">
+          <div class="kanban-col-header">
+            <span class="kanban-col-title">Refus</span>
+            <span class="kanban-count">2</span>
+          </div>
+          <div class="kcard">
+            <div class="kcard-company">NSIA Banque</div>
+            <div class="kcard-title">Responsable Administratif</div>
+            <div style="font-size:0.72rem;color:var(--text-muted);margin-top:4px">Profil ne correspondant pas</div>
+          </div>
+          <div class="kcard">
+            <div class="kcard-company">Airtel CI</div>
+            <div class="kcard-title">Office Manager</div>
+            <div style="font-size:0.72rem;color:var(--text-muted);margin-top:4px">Poste pourvu en interne</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- NOUVELLE CANDIDATURE + CV + LETTRE -->
+    <div id="page-candidature-new" class="page-content fade-in hidden">
+      <div class="page-header">
+        <h1 class="page-title">Nouvelle candidature</h1>
+        <p class="page-sub">Collez l'offre d'emploi et obtenez un CV + une lettre de motivation adaptés en quelques secondes.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+        <div>
+          <div class="card" style="margin-bottom:20px">
+            <h3 style="font-size:1rem;color:var(--navy);margin-bottom:16px">1. L'offre d'emploi</h3>
+            <div style="display:flex;flex-direction:column;gap:14px">
+              <div class="form-row">
+                <div class="form-group"><label class="form-label">Entreprise</label><input type="text" class="form-input" value="MTN Côte d'Ivoire"></div>
+                <div class="form-group"><label class="form-label">Poste</label><input type="text" class="form-input" value="Office Manager"></div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Texte de l'offre</label>
+                <textarea class="form-input form-textarea" style="height:140px">MTN CI recherche un(e) Office Manager pour rejoindre notre équipe à Abidjan. 
+
+Missions : Gestion administrative du siège, coordination inter-services, gestion des agendas de la Direction Générale, organisation d'événements corporate, supervision des prestataires...
+
+Profil : Bac+3 minimum, 3 ans d'expérience, maîtrise des outils bureautiques, excellente communication, bilingue FR/EN.</textarea>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-gold btn-full btn-lg" id="gen-btn" onclick="generateDocuments()">
+            ✨ Générer CV + Lettre de motivation
+          </button>
+          <div id="gen-loading" class="hidden" style="text-align:center;padding:24px">
+            <div class="loading-dots" style="justify-content:center;margin-bottom:12px">
+              <div class="loading-dot"></div>
+              <div class="loading-dot" style="animation-delay:0.15s"></div>
+              <div class="loading-dot" style="animation-delay:0.3s"></div>
+            </div>
+            <div style="font-size:0.85rem;color:var(--text-muted)">Analyse de l'offre et adaptation à votre profil...</div>
+          </div>
+        </div>
+        <div id="generated-docs" class="hidden">
+          <div style="display:flex;gap:8px;margin-bottom:16px">
+            <button class="btn btn-primary btn-sm" id="doc-tab-cv" onclick="switchDocTab('cv')">📄 CV adapté</button>
+            <button class="btn btn-ghost btn-sm" id="doc-tab-lettre" onclick="switchDocTab('lettre')">✉️ Lettre de motivation</button>
+          </div>
+          <div id="doc-cv" class="document-preview">
+            <div style="text-align:center;margin-bottom:16px">
+              <div style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;color:var(--navy)">AMARA KONÉ</div>
+              <div style="font-size:0.85rem;color:var(--text-muted)">Office Manager | Coordinatrice Administrative</div>
+              <div style="font-size:0.8rem;color:var(--text-muted)">Abidjan · amara.kone@gmail.com · +225 07 xx xx xx · LinkedIn</div>
+            </div>
+            <div class="cv-section-title">RÉSUMÉ DE PROFIL</div>
+            <p style="font-size:0.83rem;line-height:1.7">Office Manager rigoureuse et polyvalente avec 3 ans d'expérience dans la gestion administrative de direction, la coordination inter-services et l'organisation d'événements corporate. Réputée pour ma fiabilité, mon sens du détail et ma capacité à gérer plusieurs priorités simultanément. Bilingue français-anglais (B2 certifié). Maîtrise d'Odoo ERP, Asana et de la suite Microsoft Office.</p>
+            <div class="cv-section-title">COMPÉTENCES CLÉS</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;font-size:0.82rem">
+              <div>✓ Gestion d'agenda complexe (niveau Expert)</div>
+              <div>✓ Coordination inter-services</div>
+              <div>✓ Organisation événements corporate</div>
+              <div>✓ Odoo ERP (RH & Achats)</div>
+              <div>✓ Communication bilingue FR/EN</div>
+              <div>✓ Asana · Canva · Suite Office</div>
+            </div>
+            <div class="cv-section-title">EXPÉRIENCES PROFESSIONNELLES</div>
+            <div style="margin-bottom:12px">
+              <div style="display:flex;justify-content:space-between"><strong style="font-size:0.87rem">Assistante de Direction</strong><span style="font-size:0.77rem;color:var(--text-muted)">2023 — 2026</span></div>
+              <div style="font-size:0.8rem;color:var(--gold);font-weight:600">Agence de Voyage · Abidjan</div>
+              <div style="font-size:0.82rem;margin-top:4px;line-height:1.6">• Gestion simultanée des agendas du DG et DGA (40+ réunions/semaine) • Organisation de 15+ événements corporate annuels • Implémentation et administration du module Odoo RH</div>
+            </div>
+            <div style="background:var(--success-bg);border-radius:6px;padding:8px;display:flex;align-items:center;gap:8px">
+              <div style="font-size:1rem">⚡</div>
+              <div style="font-size:0.78rem;color:var(--success);font-weight:600">Score ATS estimé : 94/100 · Mots-clés de l'offre couverts à 91%</div>
+            </div>
+          </div>
+          <div id="doc-lettre" class="document-preview hidden">
+            <div style="font-size:0.85rem;color:var(--text-muted);margin-bottom:8px">Abidjan, le 22 mars 2026</div>
+            <div style="font-size:0.85rem;margin-bottom:16px"><strong>À l'attention de la Direction des Ressources Humaines</strong><br>MTN Côte d'Ivoire</div>
+            <div style="font-size:0.85rem;font-weight:600;margin-bottom:12px">Objet : Candidature au poste d'Office Manager</div>
+            <div style="font-size:0.83rem;line-height:1.9">
+              <p style="margin-bottom:10px">Madame, Monsieur,</p>
+              <p style="margin-bottom:10px">Fort(e) de trois années d'expérience en assistanat de direction et coordination administrative, je vous adresse ma candidature pour le poste d'Office Manager au sein de MTN Côte d'Ivoire avec un intérêt sincère pour votre organisation.</p>
+              <p style="margin-bottom:10px">Dans mon poste actuel, j'ai développé une expertise reconnue dans la gestion d'agendas complexes et la coordination inter-services — des compétences directement transférables aux missions que vous décrivez. Mon approche méthodique et ma capacité à anticiper les besoins de la direction m'ont permis d'assurer une continuité opérationnelle même dans les périodes d'activité intense.</p>
+              <p style="margin-bottom:10px">Ce qui me distingue, c'est ma capacité à allier rigueur analytique et sens relationnel. Mon bilinguisme français-anglais et ma maîtrise d'outils tels qu'Odoo ERP et Asana me permettraient de m'intégrer rapidement et d'apporter une valeur ajoutée immédiate à vos équipes.</p>
+              <p>Je serais heureuse de vous exposer lors d'un entretien la manière dont mon profil peut répondre à vos attentes.</p>
+              <p style="margin-top:10px">Dans cette attente, veuillez agréer l'expression de mes cordiales salutations.</p>
+              <p style="margin-top:10px;font-weight:600">Amara Koné</p>
+            </div>
+          </div>
+          <div style="display:flex;gap:10px;margin-top:12px">
+            <button class="btn btn-primary btn-sm">💾 Sauvegarder</button>
+            <button class="btn btn-ghost btn-sm">📋 Copier</button>
+            <button class="btn btn-ghost btn-sm">📥 Télécharger PDF</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CANDIDATURE DETAIL -->
+    <div id="page-candidature-detail" class="page-content fade-in hidden">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:24px">
+        <button class="btn btn-ghost btn-sm" onclick="navigateTo('candidatures')">← Retour</button>
+        <span class="badge badge-gold">Entretien planifié</span>
+      </div>
+      <div class="card">
+        <div class="cand-detail-header">
+          <div>
+            <div style="font-size:0.8rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:4px">Orange Côte d'Ivoire</div>
+            <h2 style="font-size:1.4rem;color:var(--navy)">Office Manager</h2>
+            <div style="font-size:0.85rem;color:var(--text-muted);margin-top:4px">Candidature envoyée le 12 mars 2026</div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--gold)">94<span style="font-size:1rem;color:var(--text-muted)">/100</span></div>
+            <div style="font-size:0.75rem;color:var(--text-muted)">Score ATS</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:12px;padding:16px 28px;border-bottom:1px solid var(--border)">
+          <button class="btn btn-primary btn-sm" onclick="navigateTo('entretien')">🎤 Préparer l'entretien</button>
+          <button class="btn btn-ghost btn-sm">📄 Voir le CV</button>
+          <button class="btn btn-ghost btn-sm">✉️ Voir la lettre</button>
+          <select class="form-input form-select btn-sm" style="width:180px;font-size:0.8rem">
+            <option>Entretien planifié</option>
+            <option>Envoyée</option>
+            <option>En attente</option>
+            <option>Offre reçue</option>
+            <option>Refus</option>
+          </select>
+        </div>
+        <div style="padding:24px 28px">
+          <div style="background:var(--gold-pale);border-radius:var(--radius-sm);padding:16px;margin-bottom:20px;border:1px solid rgba(212,168,67,0.3)">
+            <div style="font-size:0.8rem;font-weight:700;color:var(--warning);margin-bottom:8px">📅 Entretien planifié</div>
+            <div style="font-size:0.95rem;font-weight:600;color:var(--text)">Samedi 28 mars 2026 à 10h00</div>
+            <div style="font-size:0.82rem;color:var(--text-muted)">Tour Eiffel, Boulevard de la République, Plateau, Abidjan</div>
+          </div>
+          <div style="font-size:0.85rem;font-weight:600;color:var(--navy);margin-bottom:8px">Notes personnelles</div>
+          <textarea class="form-input form-textarea" placeholder="Ajoutez vos notes ici...">Entretien avec le DRH + le DG directement selon l'offre. Préparer des exemples concrets sur la gestion multi-agenda. Demander les outils utilisés actuellement.</textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- PREPARATION ENTRETIEN -->
+    <div id="page-entretien" class="page-content fade-in hidden">
+      <div class="page-header">
+        <h1 class="page-title">Préparation entretien</h1>
+        <p class="page-sub">Kit personnalisé · Orange CI — Office Manager · 28 mars 2026</p>
+      </div>
+      <div style="background:var(--gold-pale);border:1px solid rgba(212,168,67,0.3);border-radius:var(--radius-sm);padding:16px;margin-bottom:24px;display:flex;align-items:center;gap:16px">
+        <span style="font-size:1.5rem">📅</span>
+        <div>
+          <div style="font-weight:700;color:var(--navy)">Entretien dans 6 jours — Samedi 28 mars à 10h00</div>
+          <div style="font-size:0.82rem;color:var(--text-muted)">Orange CI · Tour Eiffel, Plateau · Avec le DRH et le DG</div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1.2fr 1fr;gap:24px">
+        <div>
+          <div style="display:flex;gap:8px;margin-bottom:16px">
+            <button class="btn btn-primary btn-sm" id="ent-tab-prep" onclick="switchEntTab('prep')">Questions & Réponses</button>
+            <button class="btn btn-ghost btn-sm" id="ent-tab-sim" onclick="switchEntTab('sim')">🎭 Simulation</button>
+            <button class="btn btn-ghost btn-sm" id="ent-tab-ask" onclick="switchEntTab('ask')">Questions à poser</button>
+          </div>
+          <div id="ent-prep">
+            <div class="question-card">
+              <div class="question-type">Comportemental</div>
+              <div class="question-text">Parlez-moi d'une situation où vous avez dû gérer plusieurs priorités urgentes simultanément.</div>
+              <div style="font-size:0.78rem;font-weight:600;color:var(--gold);margin-bottom:8px">✦ Réponse suggérée (méthode STAR)</div>
+              <div class="star-method">
+                <div class="star-item"><div class="star-label">Situation</div><div class="star-content">Semaine de clôture annuelle : DG en déplacement Paris, 3 comités le même jour, DGA avec urgence client</div></div>
+                <div class="star-item"><div class="star-label">Tâche</div><div class="star-content">Assurer la continuité des deux agendas sans aucune collision ni réunion manquée</div></div>
+                <div class="star-item"><div class="star-label">Action</div><div class="star-content">Activation protocole priorisé, délégation des réunions non critiques, communication transparente aux parties prenantes</div></div>
+                <div class="star-item"><div class="star-label">Résultat</div><div class="star-content">Zéro réunion manquée. Le DG a mentionné cette gestion lors du bilan annuel comme exemple de fiabilité.</div></div>
+              </div>
+            </div>
+            <div class="question-card">
+              <div class="question-type">Motivationnel</div>
+              <div class="question-text">Pourquoi Orange CI et pourquoi ce poste en particulier ?</div>
+              <div class="answer-text">
+                <strong>Conseil IA :</strong> Votre Chemin de Vie 7 vous prédispose à valoriser les organisations structurées et reconnues pour leur excellence opérationnelle. Orange CI correspond parfaitement à ce profil. Mentionnez spécifiquement l'envergure panafricaine et les standards de processus que vous y retrouveriez.
+                <div class="coaching-tip" style="margin-top:10px">
+                  <span>💡</span> Évitez "j'aime Orange". Dites plutôt : "La complexité opérationnelle et l'envergure régionale d'Orange CI correspondent exactement au type d'environnement où je suis la plus performante."
+                </div>
+              </div>
+            </div>
+            <div class="question-card">
+              <div class="question-type">Technique</div>
+              <div class="question-text">Quels outils utilisez-vous pour la gestion administrative et comment gérez-vous les flux d'information ?</div>
+              <div class="answer-text">Décrivez votre usage d'Odoo ERP, Asana pour le suivi des tâches transverses, et votre système personnel de classification des informations sensibles. Mentionnez votre approche "inbox zéro" et vos protocoles de transmission.</div>
+            </div>
+          </div>
+          <div id="ent-sim" class="hidden">
+            <div class="chat-container" style="height:420px">
+              <div style="background:var(--navy);padding:12px 16px;color:white;font-size:0.82rem">
+                <strong>Mode simulation</strong> — Je joue le rôle du DRH d'Orange CI. Répondez comme en vrai entretien.
+              </div>
+              <div class="chat-messages" id="sim-chat">
+                <div class="chat-msg ai">
+                  <div class="chat-avatar chat-ai-avatar" style="background:var(--navy)">👔</div>
+                  <div class="chat-bubble">Bonjour Mme Koné, merci de nous avoir rejoints. Pour commencer, pouvez-vous me faire un bref résumé de votre parcours et me dire ce qui vous a amené à postuler chez Orange CI ?</div>
+                </div>
+              </div>
+              <div class="chat-input-area">
+                <input type="text" class="form-input" placeholder="Votre réponse comme en vrai entretien..." id="sim-input" style="flex:1" onkeydown="if(event.key==='Enter')sendSimMsg()">
+                <button class="btn btn-primary" onclick="sendSimMsg()">Répondre</button>
+              </div>
+            </div>
+          </div>
+          <div id="ent-ask" class="hidden">
+            <div class="card">
+              <h3 style="font-size:0.95rem;color:var(--navy);margin-bottom:16px">Questions intelligentes à poser au recruteur</h3>
+              <div style="display:flex;flex-direction:column;gap:12px">
+                <div style="padding:12px;background:var(--bg);border-radius:8px;border-left:3px solid var(--gold)">
+                  <div style="font-size:0.87rem;font-weight:600;margin-bottom:4px">"Comment est structurée la collaboration entre l'Office Manager et les différentes directions ?"</div>
+                  <div style="font-size:0.75rem;color:var(--text-muted)">Montre votre intérêt pour les dynamiques organisationnelles</div>
+                </div>
+                <div style="padding:12px;background:var(--bg);border-radius:8px;border-left:3px solid var(--navy)">
+                  <div style="font-size:0.87rem;font-weight:600;margin-bottom:4px">"Quels sont les outils de gestion administrative principalement utilisés par l'équipe actuellement ?"</div>
+                  <div style="font-size:0.75rem;color:var(--text-muted)">Pratique et stratégique — vous vous projetez déjà dans le rôle</div>
+                </div>
+                <div style="padding:12px;background:var(--bg);border-radius:8px;border-left:3px solid var(--navy)">
+                  <div style="font-size:0.87rem;font-weight:600;margin-bottom:4px">"Quels sont les principaux défis que votre futur Office Manager devra relever dans les 6 premiers mois ?"</div>
+                  <div style="font-size:0.75rem;color:var(--text-muted)">Montre votre maturité professionnelle et votre anticipation</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="card" style="margin-bottom:16px">
+            <h3 style="font-size:0.95rem;color:var(--navy);margin-bottom:16px">Votre profil pour ce poste</h3>
+            <div style="display:flex;flex-direction:column;gap:10px">
+              <div>
+                <div style="display:flex;justify-content:space-between;font-size:0.8rem;margin-bottom:4px"><span>Correspondance globale</span><span style="font-weight:700;color:var(--success)">94%</span></div>
+                <div class="progress-bar"><div class="progress-fill" style="width:94%"></div></div>
+              </div>
+              <div>
+                <div style="display:flex;justify-content:space-between;font-size:0.8rem;margin-bottom:4px"><span>Compétences techniques</span><span style="font-weight:700;color:var(--navy)">88%</span></div>
+                <div class="progress-bar"><div class="progress-fill" style="width:88%"></div></div>
+              </div>
+              <div>
+                <div style="display:flex;justify-content:space-between;font-size:0.8rem;margin-bottom:4px"><span>Alignement personnalité</span><span style="font-weight:700;color:var(--gold)">96%</span></div>
+                <div class="progress-bar"><div class="progress-fill" style="width:96%;background:linear-gradient(90deg,var(--gold),var(--gold-light))"></div></div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <h3 style="font-size:0.95rem;color:var(--navy);margin-bottom:12px">Conseils personnalisés</h3>
+            <div style="display:flex;flex-direction:column;gap:10px">
+              <div class="coaching-tip">
+                <span>✦</span>
+                <span>Votre Agréabilité 88 est un atout majeur pour ce rôle. Montrez des exemples de médiation réussie entre directions.</span>
+              </div>
+              <div class="coaching-tip">
+                <span>💡</span>
+                <span>Extraversion modérée : ne jouez pas un rôle. Votre calme inspire confiance — c'est exactement ce que cherche un DG.</span>
+              </div>
+              <div class="coaching-tip">
+                <span>⚡</span>
+                <span>Préparez 3 chiffres concrets : volumes gérés, événements organisés, gains d'efficacité obtenus.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GRILLE SALARIALE -->
+    <div id="page-salaire" class="page-content fade-in hidden">
+      <div class="page-header">
+        <h1 class="page-title">Grille salariale & Négociation</h1>
+        <p class="page-sub">Données du marché ivoirien par poste et secteur.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1.3fr;gap:24px">
+        <div>
+          <div class="card" style="margin-bottom:20px">
+            <h3 style="font-size:1rem;color:var(--navy);margin-bottom:16px">Simulateur de salaire</h3>
+            <div style="display:flex;flex-direction:column;gap:14px">
+              <div class="form-group">
+                <label class="form-label">Poste</label>
+                <select class="form-input form-select" id="sal-poste" onchange="calcSalary()">
+                  <option value="om">Office Manager</option>
+                  <option value="ad">Assistante de Direction</option>
+                  <option value="ea">Executive Assistant</option>
+                  <option value="coord">Coordinatrice Administrative</option>
+                  <option value="ra">Responsable Administratif</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Secteur</label>
+                <select class="form-input form-select" id="sal-secteur" onchange="calcSalary()">
+                  <option value="telecom">Télécommunications</option>
+                  <option value="banque">Banque & Finance</option>
+                  <option value="industrie">Industrie & FMCG</option>
+                  <option value="service">Services & Conseil</option>
+                  <option value="energie">Énergie & Pétrole</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Années d'expérience</label>
+                <select class="form-input form-select" id="sal-exp" onchange="calcSalary()">
+                  <option value="0-2">0 – 2 ans</option>
+                  <option value="3-5" selected>3 – 5 ans</option>
+                  <option value="6-10">6 – 10 ans</option>
+                  <option value="10+">10+ ans</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Offre reçue (optionnel)</label>
+                <input type="number" class="form-input" id="sal-offre" placeholder="ex: 450000" value="450000" oninput="calcSalary()">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="salary-results">
+          <div class="salary-result">
+            <div style="font-size:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:0.05em;color:rgba(255,255,255,0.6);margin-bottom:4px">Office Manager · Télécoms · 3-5 ans · Abidjan</div>
+            <div style="font-size:0.85rem;color:rgba(255,255,255,0.7);margin-bottom:4px">Fourchette du marché</div>
+            <div class="salary-range" id="sal-range">380 000 – 650 000 FCFA</div>
+            <div style="font-size:0.8rem;color:rgba(255,255,255,0.6)">Médiane : 510 000 FCFA/mois</div>
+            <div class="salary-bar-wrap">
+              <div style="display:flex;justify-content:space-between;font-size:0.72rem;color:rgba(255,255,255,0.5);margin-bottom:4px">
+                <span>380k (min)</span><span>510k (médiane)</span><span>650k (max)</span>
+              </div>
+              <div class="salary-bar-track">
+                <div class="salary-bar-fill" style="width:85%"></div>
+                <div class="salary-bar-marker" style="left:55%" title="Votre offre : 450k"></div>
+              </div>
+              <div style="font-size:0.78rem;color:var(--gold-light);text-align:center;margin-top:8px">📍 Votre offre de 450 000 FCFA se situe <strong>sous la médiane du marché</strong></div>
+            </div>
+          </div>
+          <div class="nego-card">
+            <div style="font-size:0.85rem;font-weight:700;color:var(--navy);margin-bottom:12px">💬 Stratégie de négociation recommandée</div>
+            <div style="background:var(--warning-bg);border-radius:8px;padding:12px;margin-bottom:12px;border-left:3px solid var(--warning)">
+              <div style="font-size:0.8rem;font-weight:700;color:var(--warning)">⚠️ Recommandation : Contre-proposer</div>
+              <div style="font-size:0.82rem;margin-top:4px;color:var(--text)">L'offre de 450 000 FCFA est 12% sous la médiane du marché pour ce profil. Vous avez des arguments solides pour négocier.</div>
+            </div>
+            <div style="font-size:0.85rem;font-weight:600;color:var(--text);margin-bottom:8px">Script de négociation :</div>
+            <div style="font-size:0.83rem;color:var(--text);line-height:1.8;background:white;padding:14px;border-radius:8px;border:1px solid var(--border)">
+              "Je suis très enthousiaste à l'idée de rejoindre TotalEnergies. Après avoir comparé cette offre aux standards du marché pour ce niveau d'expertise et cette envergure de poste, je souhaitais vous soumettre une proposition à <strong>520 000 FCFA</strong>, ce qui correspond à la médiane du marché pour un profil Expert validé en gestion administrative. Je reste ouverte à discuter de l'ensemble du package."
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px">
+              <span class="badge badge-blue">✓ Votre niveau Expert validé</span>
+              <span class="badge badge-blue">✓ Bilinguisme FR/EN</span>
+              <span class="badge badge-gold">✓ Maîtrise Odoo ERP</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COACHING -->
+    <div id="page-coaching" class="page-content fade-in hidden">
+      <div class="page-header">
+        <h1 class="page-title">Coaching hebdomadaire</h1>
+        <p class="page-sub">Messages personnalisés générés à partir de votre profil et l'état de votre recherche.</p>
+      </div>
+      <div style="max-width:760px">
+        <div class="coaching-week current">
+          <div class="coaching-dot"></div>
+          <div class="coaching-week-label">✦ Cette semaine — 22-28 mars 2026</div>
+          <div class="coaching-msg-card">
+            <div class="coaching-msg-type">PRÉPARATION ENTRETIEN</div>
+            <div style="font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--navy);margin-bottom:10px">Votre entretien Orange CI approche — voici comment l'aborder avec votre personnalité</div>
+            <div class="coaching-msg-text">Amara, votre profil Chemin de Vie 7 est celui de l'analyste-expert. En entretien, ne cherchez pas à paraître plus extraverti(e) que vous ne l'êtes — c'est une erreur que beaucoup font. Au contraire, votre calme, votre précision dans les réponses et votre profondeur d'analyse sont exactement ce qu'un DG qui cherche une Office Manager de confiance veut voir. Chaque exemple que vous donnez doit avoir un chiffre : un volume, un délai, un résultat mesurable.</div>
+            <div class="coaching-tip">
+              <span>⚡</span>
+              <span><strong>Action de la semaine :</strong> Préparez 3 exemples STAR chronométrés (max 90 secondes chacun). Votre Conscience 82 vous aidera à les structurer parfaitement.</span>
+            </div>
+          </div>
+        </div>
+        <div class="coaching-week">
+          <div class="coaching-dot"></div>
+          <div class="coaching-week-label">Semaine du 15 mars 2026</div>
+          <div class="coaching-msg-card">
+            <div class="coaching-msg-type">POSITIONNEMENT</div>
+            <div style="font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--navy);margin-bottom:10px">Transformez votre "seulement 3 ans d'expérience" en force</div>
+            <div class="coaching-msg-text">Vous avez géré des agendas de niveau C-suite dès votre premier poste — c'est une exposition que beaucoup n'ont jamais. Arrêtez d'utiliser le mot "seulement" en parlant de votre expérience. À la place : "En 3 ans, j'ai eu une exposition directe aux enjeux de direction que certains ne rencontrent qu'en 10 ans."</div>
+          </div>
+        </div>
+        <div class="coaching-week">
+          <div class="coaching-dot"></div>
+          <div class="coaching-week-label">Semaine du 8 mars 2026</div>
+          <div class="coaching-msg-card">
+            <div class="coaching-msg-type">COMPÉTENCE À DÉVELOPPER</div>
+            <div style="font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--navy);margin-bottom:10px">Votre prochaine compétence à valoriser : la gestion de projet formelle</div>
+            <div class="coaching-msg-text">Votre pratique d'Asana montre que vous avez déjà des réflexes de PM. Une certification Prince2 Foundation (ou même une formation Coursera sur la gestion de projet) renforcerait significativement votre profil pour les postes d'Office Manager dans les grandes structures.</div>
+            <div class="coaching-tip">
+              <span>📚</span>
+              <span>Ressource recommandée : "Project Management Basics" sur Coursera — 6 heures, gratuit en audit. Directement valorisable sur votre CV et LinkedIn.</span>
+            </div>
+          </div>
+        </div>
+        <div class="coaching-week">
+          <div class="coaching-dot"></div>
+          <div class="coaching-week-label">Semaine du 1er mars 2026</div>
+          <div class="coaching-msg-card">
+            <div class="coaching-msg-type">BILAN HEBDOMADAIRE</div>
+            <div style="font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--navy);margin-bottom:10px">Semaine intense : 4 candidatures et 1 retour positif</div>
+            <div class="coaching-msg-text">Vous avez envoyé 4 candidatures cette semaine et obtenu un premier retour positif d'Orange CI. Votre taux de conversion (candidature → entretien) est de 25% — c'est au-dessus de la moyenne du marché (15%). La qualité de vos dossiers fait la différence. Continuez sur cette dynamique.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ABONNEMENT -->
+    <div id="page-abonnement" class="page-content fade-in hidden">
+      <div class="page-header">
+        <h1 class="page-title">Mon abonnement</h1>
+        <p class="page-sub">Gérez votre plan Career OS.</p>
+      </div>
+      <div class="card" style="margin-bottom:28px;border-top:4px solid var(--success)">
+        <div style="display:flex;align-items:center;justify-content:space-between">
+          <div style="display:flex;align-items:center;gap:16px">
+            <div style="width:52px;height:52px;background:var(--success-bg);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.5rem">✅</div>
+            <div>
+              <div style="font-weight:700;color:var(--navy);font-size:1.05rem">Plan Trimestriel — Actif</div>
+              <div style="font-size:0.82rem;color:var(--text-muted);margin-top:2px">Valide jusqu'au 22 juin 2026 · 91 jours restants</div>
+            </div>
+          </div>
+          <div style="text-align:right">
+            <div style="font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;color:var(--navy)">25 000 <span style="font-size:0.9rem;color:var(--text-muted)">FCFA</span></div>
+            <div style="font-size:0.78rem;color:var(--text-muted)">Payé le 22 mars 2026</div>
+          </div>
+        </div>
+      </div>
+      <h3 style="font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--navy);margin-bottom:20px">Changer de plan</h3>
+      <div class="plan-grid">
+        <div class="plan-card">
+          <div class="plan-name">Mensuel</div>
+          <div class="plan-price">9 900 <span>FCFA/mois</span></div>
+          <div class="plan-save">&nbsp;</div>
+          <div style="display:flex;flex-direction:column;gap:8px;margin:16px 0;font-size:0.82rem">
+            <div>✓ Analyse de personnalité</div>
+            <div>✓ Bilan de compétences</div>
+            <div>✓ 5 CV générés/mois</div>
+          </div>
+          <button class="btn btn-ghost btn-full btn-sm">Choisir Mensuel</button>
+        </div>
+        <div class="plan-card active">
+          <div class="plan-name">Trimestriel</div>
+          <div class="plan-price">25 000 <span>FCFA/3 mois</span></div>
+          <div class="plan-save">✓ Votre plan actuel</div>
+          <div style="display:flex;flex-direction:column;gap:8px;margin:16px 0;font-size:0.82rem">
+            <div>✓ Tout ce qui est dans Mensuel</div>
+            <div>✓ CV illimités</div>
+            <div>✓ Simulateur d'entretien</div>
+            <div>✓ Grille salariale</div>
+          </div>
+          <button class="btn btn-primary btn-full btn-sm" disabled style="opacity:0.6">Plan actuel</button>
+        </div>
+        <div class="plan-card">
+          <div class="plan-name">Annuel</div>
+          <div class="plan-price">85 000 <span>FCFA/an</span></div>
+          <div class="plan-save" style="color:var(--success)">Économisez 33 800 FCFA</div>
+          <div style="display:flex;flex-direction:column;gap:8px;margin:16px 0;font-size:0.82rem">
+            <div>✓ Tout ce qui est dans Trimestriel</div>
+            <div>✓ Portfolio partageable</div>
+            <div>✓ Accès anticipé nouveautés</div>
+          </div>
+          <button class="btn btn-gold btn-full btn-sm">Passer à Annuel</button>
+        </div>
+      </div>
+      <div class="card" style="margin-top:20px">
+        <h3 style="font-size:0.95rem;color:var(--navy);margin-bottom:12px">Historique des paiements</h3>
+        <table style="width:100%;border-collapse:collapse;font-size:0.85rem">
+          <thead><tr style="border-bottom:2px solid var(--border)">
+            <th style="text-align:left;padding:8px 0;color:var(--text-muted);font-weight:600">Date</th>
+            <th style="text-align:left;padding:8px 0;color:var(--text-muted);font-weight:600">Plan</th>
+            <th style="text-align:left;padding:8px 0;color:var(--text-muted);font-weight:600">Montant</th>
+            <th style="text-align:left;padding:8px 0;color:var(--text-muted);font-weight:600">Statut</th>
+          </tr></thead>
+          <tbody>
+            <tr style="border-bottom:1px solid var(--border)"><td style="padding:10px 0">22 mars 2026</td><td>Trimestriel</td><td>25 000 FCFA</td><td><span class="badge badge-green">Payé</span></td></tr>
+            <tr style="border-bottom:1px solid var(--border)"><td style="padding:10px 0">22 décembre 2025</td><td>Trimestriel</td><td>25 000 FCFA</td><td><span class="badge badge-green">Payé</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div><!-- /main-content -->
+</div><!-- /view-app -->
+
+<script>
+// ================================================================
+//  STATE
+// ================================================================
+const state = {
+  currentPage: 'dashboard',
+  onboardingStep: 3
+};
+
+// ================================================================
+//  ROUTING
+// ================================================================
+function navigateTo(page) {
+  // Hide all pages
+  document.querySelectorAll('.page-content').forEach(p => p.classList.add('hidden'));
+
+  // Show target
+  const target = document.getElementById('page-' + page);
+  if (target) {
+    target.classList.remove('hidden');
+    target.classList.add('fade-in');
+    setTimeout(() => target.classList.remove('fade-in'), 400);
+  }
+
+  // Update topbar title
+  const titles = {
+    'dashboard': 'Tableau de bord',
+    'onboarding': 'Analyse de personnalité',
+    'bilan': 'Bilan de compétences',
+    'candidatures': 'Mes candidatures',
+    'candidature-new': 'Nouvelle candidature',
+    'candidature-detail': 'Détail candidature',
+    'entretien': 'Préparation entretien',
+    'salaire': 'Grille salariale',
+    'coaching': 'Coaching hebdomadaire',
+    'abonnement': 'Mon abonnement'
+  };
+  const topbar = document.getElementById('topbar-title');
+  if (topbar) topbar.textContent = titles[page] || page;
+
+  // Update active nav
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  const navId = 'nav-' + page.replace('-new','').replace('-detail','').replace('-new','');
+  const activeNav = document.getElementById(navId);
+  if (activeNav) activeNav.classList.add('active');
+
+  state.currentPage = page;
+
+  // Scroll to top
+  window.scrollTo(0, 0);
+}
+
+// ================================================================
+//  AUTH
+// ================================================================
+function showLanding() {
+  document.getElementById('view-landing').classList.remove('hidden');
+  document.getElementById('view-auth').classList.add('hidden');
+  document.getElementById('view-app').classList.add('hidden');
+}
+
+function showAuth(tab) {
+  document.getElementById('view-landing').classList.add('hidden');
+  document.getElementById('view-auth').classList.remove('hidden');
+  document.getElementById('view-app').classList.add('hidden');
+  switchTab(tab);
+}
+
+function switchTab(tab) {
+  document.getElementById('form-login').classList.toggle('hidden', tab !== 'login');
+  document.getElementById('form-register').classList.toggle('hidden', tab !== 'register');
+  document.getElementById('tab-login').classList.toggle('active', tab === 'login');
+  document.getElementById('tab-register').classList.toggle('active', tab === 'register');
+}
+
+function demoLogin() {
+  document.getElementById('view-landing').classList.add('hidden');
+  document.getElementById('view-auth').classList.add('hidden');
+  document.getElementById('view-app').classList.remove('hidden');
+  navigateTo('dashboard');
+}
+
+// ================================================================
+//  ONBOARDING
+// ================================================================
+function goToStep(step) {
+  [1,2,3,4].forEach(i => {
+    const el = document.getElementById('ob-step-' + i);
+    if (el) el.classList.add('hidden');
+  });
+  const target = document.getElementById('ob-step-' + step);
+  if (target) target.classList.remove('hidden');
+  updateStepDots(step);
+  state.onboardingStep = step;
+
+  // Render Big Five for step 2
+  if (step === 2) renderBigFive();
+}
+
+function updateStepDots(step) {
+  for (let i = 1; i <= 4; i++) {
+    const dot = document.getElementById('sdot' + i);
+    if (!dot) continue;
+    dot.className = 'step-dot';
+    if (i < step) { dot.classList.add('done'); dot.textContent = '✓'; }
+    else if (i === step) { dot.classList.add('active'); dot.textContent = i; }
+    else { dot.textContent = i; }
+  }
+}
+
+const bigFiveQuestions = [
+  { text: "J'aime explorer de nouvelles idées et concepts.", labelL: "Pas du tout", labelR: "Tout à fait", dim: "Ouverture" },
+  { text: "J'ai une curiosité naturelle pour de nombreux sujets différents.", labelL: "Rarement", labelR: "Toujours", dim: "Ouverture" },
+  { text: "Je suis toujours préparé(e) avant de commencer une tâche.", labelL: "Rarement", labelR: "Toujours", dim: "Conscience" },
+  { text: "Je respecte scrupuleusement les délais fixés.", labelL: "Difficilement", labelR: "Naturellement", dim: "Conscience" },
+  { text: "Je me sens à l'aise dans les grandes réunions.", labelL: "Mal à l'aise", labelR: "À l'aise", dim: "Extraversion" },
+  { text: "Je trouve de l'énergie dans les interactions sociales.", labelL: "Au contraire", labelR: "Absolument", dim: "Extraversion" },
+  { text: "Je cherche toujours à aider mes collègues.", labelL: "Rarement", labelR: "Instinctivement", dim: "Agréabilité" },
+  { text: "Je préfère trouver des compromis plutôt que de gagner un conflit.", labelL: "Non", labelR: "Oui", dim: "Agréabilité" },
+  { text: "Je suis facilement affecté(e) par le stress au travail.", labelL: "Pas du tout", labelR: "Beaucoup", dim: "Stabilité" },
+  { text: "Les critiques me déstabilisent facilement.", labelL: "Non", labelR: "Oui", dim: "Stabilité" },
+];
+
+const bigFiveDefaults = [4,3,4,4,2,3,5,4,2,3];
+
+function renderBigFive() {
+  const area = document.getElementById('bf-question-area');
+  if (!area) return;
+  area.innerHTML = bigFiveQuestions.map((q, i) => `
+    <div class="bf-question">
+      <div class="bf-q-text">${i+1}. ${q.text}</div>
+      <div style="font-size:0.72rem;font-weight:600;color:var(--gold);margin-bottom:6px">${q.dim}</div>
+      <div class="bf-slider-row">
+        <div class="bf-label-l">${q.labelL}</div>
+        <input type="range" class="bf-slider" min="1" max="5" value="${bigFiveDefaults[i]}" 
+               oninput="this.nextElementSibling.textContent=this.value">
+        <div class="bf-val">${bigFiveDefaults[i]}</div>
+        <div class="bf-label-r">${q.labelR}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function completeBigFive() { goToStep(3); }
+
+function selectSQ(el) {
+  el.closest('#sq-question-area').querySelectorAll('.sq-option').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+function generatePortrait() {
+  goToStep(4);
+  updateStepDots(4);
+  document.getElementById('portrait-loading').classList.remove('hidden');
+  document.getElementById('portrait-result').classList.add('hidden');
+  setTimeout(() => {
+    document.getElementById('portrait-loading').classList.add('hidden');
+    document.getElementById('portrait-result').classList.remove('hidden');
+    document.getElementById('portrait-result').classList.add('fade-in');
+  }, 2800);
+}
+
+// ================================================================
+//  BILAN CHAT
+// ================================================================
+const bilanResponses = [
+  "Intéressant. Et comment organisiez-vous la transmission d'informations sensibles entre les deux directeurs ?",
+  "Très bien. Pouvez-vous me donner un exemple concret d'événement que vous avez organisé de A à Z ?",
+  "✅ Compétence **Organisation d'événements** validée au niveau **Confirmé**. Je détecte également des aptitudes de coordination multi-parties prenantes non déclarées — je les ajoute à votre profil."
+];
+let bilanIdx = 0;
+
+function sendBilanMsg() {
+  const input = document.getElementById('bilan-input');
+  const val = input.value.trim();
+  if (!val) return;
+  const chat = document.getElementById('bilan-chat');
+  // User msg
+  chat.innerHTML += `<div class="chat-msg user"><div class="chat-bubble">${val}</div></div>`;
+  input.value = '';
+  chat.scrollTop = chat.scrollHeight;
+  // Typing indicator
+  const typing = document.createElement('div');
+  typing.className = 'chat-msg ai';
+  typing.innerHTML = `<div class="chat-avatar chat-ai-avatar">🤖</div><div class="chat-bubble"><div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div></div>`;
+  chat.appendChild(typing);
+  chat.scrollTop = chat.scrollHeight;
+  setTimeout(() => {
+    chat.removeChild(typing);
+    const resp = bilanResponses[bilanIdx % bilanResponses.length];
+    chat.innerHTML += `<div class="chat-msg ai fade-in"><div class="chat-avatar chat-ai-avatar">🤖</div><div class="chat-bubble">${resp.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')}</div></div>`;
+    chat.scrollTop = chat.scrollHeight;
+    bilanIdx++;
+  }, 1600);
+}
+
+// ================================================================
+//  NOUVELLE CANDIDATURE
+// ================================================================
+function generateDocuments() {
+  const btn = document.getElementById('gen-btn');
+  const loading = document.getElementById('gen-loading');
+  const docs = document.getElementById('generated-docs');
+  btn.style.display = 'none';
+  loading.classList.remove('hidden');
+  setTimeout(() => {
+    loading.classList.add('hidden');
+    docs.classList.remove('hidden');
+    docs.classList.add('fade-in');
+  }, 2200);
+}
+
+function switchDocTab(tab) {
+  document.getElementById('doc-cv').classList.toggle('hidden', tab !== 'cv');
+  document.getElementById('doc-lettre').classList.toggle('hidden', tab !== 'lettre');
+  document.getElementById('doc-tab-cv').className = tab === 'cv' ? 'btn btn-primary btn-sm' : 'btn btn-ghost btn-sm';
+  document.getElementById('doc-tab-lettre').className = tab === 'lettre' ? 'btn btn-primary btn-sm' : 'btn btn-ghost btn-sm';
+}
+
+// ================================================================
+//  ENTRETIEN SIMULATION
+// ================================================================
+const simResponses = [
+  "Merci pour cette présentation claire. Pouvez-vous me donner un exemple concret de situation difficile que vous avez gérée en tant qu'assistante, et comment vous l'avez résolue ?",
+  "Très bien. Dernière question : quelles sont selon vous les 3 qualités indispensables pour un(e) Office Manager dans une grande structure comme Orange CI ?",
+  "Merci Mme Koné. Vous avez passé un très bon entretien. Nous reviendrons vers vous dans les 5 jours ouvrables. Avez-vous des questions pour nous ?"
+];
+let simIdx = 0;
+
+function sendSimMsg() {
+  const input = document.getElementById('sim-input');
+  const val = input.value.trim();
+  if (!val) return;
+  const chat = document.getElementById('sim-chat');
+  chat.innerHTML += `<div class="chat-msg user"><div class="chat-bubble">${val}</div></div>`;
+  input.value = '';
+  chat.scrollTop = chat.scrollHeight;
+  const typing = document.createElement('div');
+  typing.innerHTML = `<div class="chat-msg ai"><div class="chat-avatar" style="width:32px;height:32px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;font-size:0.8rem">👔</div><div class="chat-bubble"><div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div></div></div>`;
+  chat.appendChild(typing.firstChild);
+  chat.scrollTop = chat.scrollHeight;
+  setTimeout(() => {
+    const items = chat.querySelectorAll('.chat-msg');
+    chat.removeChild(items[items.length - 1]);
+    const resp = simResponses[simIdx % simResponses.length];
+    chat.innerHTML += `<div class="chat-msg ai fade-in"><div class="chat-avatar" style="width:32px;height:32px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;font-size:0.8rem">👔</div><div class="chat-bubble">${resp}</div></div>`;
+    chat.scrollTop = chat.scrollHeight;
+    simIdx++;
+  }, 1800);
+}
+
+function switchEntTab(tab) {
+  ['prep','sim','ask'].forEach(t => {
+    document.getElementById('ent-'+t).classList.toggle('hidden', t !== tab);
+    document.getElementById('ent-tab-'+t).className = t === tab ? 'btn btn-primary btn-sm' : 'btn btn-ghost btn-sm';
+  });
+}
+
+// ================================================================
+//  SALARY CALCULATOR
+// ================================================================
+const salaryData = {
+  om: { telecom: [380,510,650], banque:[400,540,700], industrie:[320,450,600], service:[280,400,550], energie:[420,580,750] },
+  ad: { telecom:[300,420,550], banque:[320,440,580], industrie:[260,380,500], service:[240,350,480], energie:[350,490,640] },
+  ea: { telecom:[350,480,620], banque:[370,500,650], industrie:[300,420,560], service:[270,390,520], energie:[400,540,700] },
+  coord: { telecom:[220,320,420], banque:[240,340,450], industrie:[200,290,390], service:[180,270,360], energie:[260,370,480] },
+  ra: { telecom:[500,700,950], banque:[550,760,1050], industrie:[450,640,880], service:[400,580,800], energie:[600,840,1150] }
+};
+const expMultiplier = {'0-2':0.85, '3-5':1.0, '6-10':1.2, '10+':1.4};
+
+function calcSalary() {
+  const poste = document.getElementById('sal-poste').value;
+  const secteur = document.getElementById('sal-secteur').value;
+  const exp = document.getElementById('sal-exp').value;
+  const offre = parseInt(document.getElementById('sal-offre').value) || 0;
+  const mult = expMultiplier[exp];
+  const base = salaryData[poste][secteur];
+  const min = Math.round(base[0] * mult / 10) * 10;
+  const med = Math.round(base[1] * mult / 10) * 10;
+  const max = Math.round(base[2] * mult / 10) * 10;
+  const rangeEl = document.getElementById('sal-range');
+  if (rangeEl) rangeEl.textContent = `${(min*1000).toLocaleString('fr-FR')} – ${(max*1000).toLocaleString('fr-FR')} FCFA`;
+}
+
+// ================================================================
+//  INIT
+// ================================================================
+document.addEventListener('DOMContentLoaded', () => {
+  // Default to onboarding step 3 shown
+  document.getElementById('ob-step-3').classList.remove('hidden');
+  document.getElementById('ob-step-1').classList.add('hidden');
+  document.getElementById('ob-step-2').classList.add('hidden');
+  document.getElementById('ob-step-4').classList.add('hidden');
+});
+</script>
+</body>
+</html>
